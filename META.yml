@@ -1,0 +1,21 @@
+---
+abstract: 'A Perl port of WebMachine'
+author:
+  - 'Stevan Little <stevan.little@iinteractive.com>'
+build_requires:
+  Test::Fatal: 0.003
+  Test::More: 0.88
+configure_requires:
+  ExtUtils::MakeMaker: 6.30
+dynamic_config: 0
+generated_by: 'Dist::Zilla version 4.300009, CPAN::Meta::Converter version 2.120630'
+license: perl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: Web-Machine
+requires:
+  HTTP::Headers::ActionPack: 0
+  Plack: 0
+  Sub::Exporter: 0
+version: 0.01
