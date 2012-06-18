@@ -1,0 +1,21 @@
+
+# tests requires
+
+JSON::XS              = 0
+Path::Class           = 0
+GD::Simple            = 0
+
+# content encoding stuff
+
+https://github.com/miyagawa/Plack-Middleware-Deflater/blob/master/lib/Plack/Middleware/Deflater.pm
+
+# Link header stuff
+
+http://tools.ietf.org/html/draft-nottingham-http-link-header-10
+http://cpansearch.perl.org/src/TOBYINK/HTTP-Link-Parser-0.103/lib/HTTP/Link/Parser.pm
+https://github.com/eclipse/egit-github/blob/master/org.eclipse.egit.github.core/src/org/eclipse/egit/github/core/client/PageLinks.java#L43-75
+http://bill.burkecentral.com/2009/10/14/link-headers-vs-custom-headers/
+
+
+
+

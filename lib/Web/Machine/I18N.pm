@@ -18,7 +18,7 @@ Web::Machine::I18N - The I18N support for HTTP information
 
 =head1 VERSION
 
-version 0.01
+version 0.02
 
 =head1 SYNOPSIS
 

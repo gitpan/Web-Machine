@@ -72,7 +72,7 @@ Web::Machine - A Perl port of WebMachine
 
 =head1 VERSION
 
-version 0.01
+version 0.02
 
 =head1 SYNOPSIS
 

@@ -697,7 +697,7 @@ Web::Machine::FSM::States - The States for Web Machine
 
 =head1 VERSION
 
-version 0.01
+version 0.02
 
 =head1 SYNOPSIS
 
