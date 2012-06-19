@@ -1,4 +1,10 @@
 package Web::Machine::I18N;
+BEGIN {
+  $Web::Machine::I18N::AUTHORITY = 'cpan:STEVAN';
+}
+{
+  $Web::Machine::I18N::VERSION = '0.03';
+}
 # ABSTRACT: The I18N support for HTTP information
 
 use strict;
@@ -18,7 +24,7 @@ Web::Machine::I18N - The I18N support for HTTP information
 
 =head1 VERSION
 
-version 0.02
+version 0.03
 
 =head1 SYNOPSIS
 

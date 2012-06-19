@@ -1,4 +1,10 @@
 package Web::Machine::Util::BodyEncoding;
+BEGIN {
+  $Web::Machine::Util::BodyEncoding::AUTHORITY = 'cpan:STEVAN';
+}
+{
+  $Web::Machine::Util::BodyEncoding::VERSION = '0.03';
+}
 # ABSTRACT: Module to handle body encoding
 
 use strict;
@@ -57,7 +63,7 @@ Web::Machine::Util::BodyEncoding - Module to handle body encoding
 
 =head1 VERSION
 
-version 0.02
+version 0.03
 
 =head1 SYNOPSIS
 

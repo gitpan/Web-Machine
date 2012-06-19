@@ -1,4 +1,10 @@
 package Web::Machine::Util::ContentNegotiation;
+BEGIN {
+  $Web::Machine::Util::ContentNegotiation::AUTHORITY = 'cpan:STEVAN';
+}
+{
+  $Web::Machine::Util::ContentNegotiation::VERSION = '0.03';
+}
 # ABSTRACT: Module to handle content negotiation
 
 use strict;
@@ -183,7 +189,7 @@ Web::Machine::Util::ContentNegotiation - Module to handle content negotiation
 
 =head1 VERSION
 
-version 0.02
+version 0.03
 
 =head1 SYNOPSIS
 

@@ -1,4 +1,10 @@
 package Web::Machine::I18N::en;
+BEGIN {
+  $Web::Machine::I18N::en::AUTHORITY = 'cpan:STEVAN';
+}
+{
+  $Web::Machine::I18N::en::VERSION = '0.03';
+}
 # ABSTRACT: The English support for I18Ned HTTP information
 
 use strict;
@@ -62,7 +68,7 @@ Web::Machine::I18N::en - The English support for I18Ned HTTP information
 
 =head1 VERSION
 
-version 0.02
+version 0.03
 
 =head1 SYNOPSIS
 

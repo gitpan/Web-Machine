@@ -1,4 +1,10 @@
 package Web::Machine;
+BEGIN {
+  $Web::Machine::AUTHORITY = 'cpan:STEVAN';
+}
+{
+  $Web::Machine::VERSION = '0.03';
+}
 # ABSTRACT: A Perl port of WebMachine
 
 use strict;
@@ -72,7 +78,7 @@ Web::Machine - A Perl port of WebMachine
 
 =head1 VERSION
 
-version 0.02
+version 0.03
 
 =head1 SYNOPSIS
 

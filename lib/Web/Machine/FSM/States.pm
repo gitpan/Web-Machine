@@ -1,4 +1,10 @@
 package Web::Machine::FSM::States;
+BEGIN {
+  $Web::Machine::FSM::States::AUTHORITY = 'cpan:STEVAN';
+}
+{
+  $Web::Machine::FSM::States::VERSION = '0.03';
+}
 # ABSTRACT: The States for Web Machine
 
 use strict;
@@ -697,7 +703,7 @@ Web::Machine::FSM::States - The States for Web Machine
 
 =head1 VERSION
 
-version 0.02
+version 0.03
 
 =head1 SYNOPSIS
 

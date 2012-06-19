@@ -125,3 +125,4 @@ t/600-yapc-talk-examples/100-add-caching.t
 t/600-yapc-talk-examples/110-service-unavabilable.t
 t/600-yapc-talk-examples/120-bind-path.t
 t/600-yapc-talk-examples/130-tracing-header.t
+weaver.ini

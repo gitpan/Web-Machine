@@ -1,4 +1,10 @@
 package Web::Machine::Resource;
+BEGIN {
+  $Web::Machine::Resource::AUTHORITY = 'cpan:STEVAN';
+}
+{
+  $Web::Machine::Resource::VERSION = '0.03';
+}
 # ABSTRACT: A base resource class
 
 use strict;
@@ -77,7 +83,7 @@ Web::Machine::Resource - A base resource class
 
 =head1 VERSION
 
-version 0.02
+version 0.03
 
 =head1 SYNOPSIS
 

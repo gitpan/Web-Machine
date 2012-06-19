@@ -1,4 +1,10 @@
 package Web::Machine::FSM;
+BEGIN {
+  $Web::Machine::FSM::AUTHORITY = 'cpan:STEVAN';
+}
+{
+  $Web::Machine::FSM::VERSION = '0.03';
+}
 # ABSTRACT: The State Machine runner
 
 use strict;
@@ -99,7 +105,13 @@ sub run {
         # - SL
         warn $_ if $DEBUG;
         $response->status( 500 );
-        $response->body( [ $_ ] );
+
+        # NOTE:
+        # this way you can handle the
+        # exception if you like via
+        # the finish_request call below
+        # - SL
+        $metadata->{'exception'} = $_;
     };
 
     $resource->finish_request( $metadata );
@@ -121,7 +133,7 @@ Web::Machine::FSM - The State Machine runner
 
 =head1 VERSION
 
-version 0.02
+version 0.03
 
 =head1 SYNOPSIS
 
