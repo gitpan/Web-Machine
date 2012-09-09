@@ -3,7 +3,7 @@ BEGIN {
   $Web::Machine::I18N::en::AUTHORITY = 'cpan:STEVAN';
 }
 {
-  $Web::Machine::I18N::en::VERSION = '0.03';
+  $Web::Machine::I18N::en::VERSION = '0.04';
 }
 # ABSTRACT: The English support for I18Ned HTTP information
 
@@ -58,7 +58,7 @@ our %Lexicon = (
 
 1;
 
-
+__END__
 
 =pod
 
@@ -68,7 +68,7 @@ Web::Machine::I18N::en - The English support for I18Ned HTTP information
 
 =head1 VERSION
 
-version 0.03
+version 0.04
 
 =head1 SYNOPSIS
 
@@ -92,7 +92,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
-
-__END__
-

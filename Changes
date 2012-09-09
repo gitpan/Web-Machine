@@ -1,5 +1,15 @@
 Revision history for Perl extension Web::Machine
 
+0.04 Sun. Sept. 9th, 2012
+    - moves all the content negotation code to
+      HTTP::Headers::ActionPack
+        - adjusted the Util module accordingly
+        - added/adjusted tests accordingly
+
+    - improve the bind_path function in Util
+        - improve existing and add more tests for this
+        - improve the docs on this too
+
 0.03 Tues. June 19th, 2012
     - fixing a missing semicolon (thanks to bricas)
     - fixing missing $VERSION numbers (also thanks to bricas)

@@ -103,10 +103,12 @@ t/010-resources/P11d.pm
 t/010-resources/P11e.pm
 t/010-resources/P3.pm
 t/010-resources/P3b.pm
+t/020-post-w-redirect.t
 t/300-content-negotiation-media-type.t
 t/301-content-negotiation-language.t
 t/302-content-negotiation-charset.t
 t/303-content-negotiation-encoding.t
+t/304-content-negotiation-match-media-type.t
 t/400-bind-path.t
 t/500-example-hello-word.t
 t/501-example-env-resource.t

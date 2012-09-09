@@ -3,7 +3,7 @@ BEGIN {
   $Web::Machine::FSM::States::AUTHORITY = 'cpan:STEVAN';
 }
 {
-  $Web::Machine::FSM::States::VERSION = '0.03';
+  $Web::Machine::FSM::States::VERSION = '0.04';
 }
 # ABSTRACT: The States for Web Machine
 
@@ -693,7 +693,7 @@ sub p11 {
 
 1;
 
-
+__END__
 
 =pod
 
@@ -703,7 +703,7 @@ Web::Machine::FSM::States - The States for Web Machine
 
 =head1 VERSION
 
-version 0.03
+version 0.04
 
 =head1 SYNOPSIS
 
@@ -736,7 +736,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
-
-__END__
-

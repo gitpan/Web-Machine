@@ -3,7 +3,7 @@ BEGIN {
   $Web::Machine::Util::AUTHORITY = 'cpan:STEVAN';
 }
 {
-  $Web::Machine::Util::VERSION = '0.03';
+  $Web::Machine::Util::VERSION = '0.04';
 }
 # ABSTRACT: General Utility module
 
@@ -36,31 +36,37 @@ sub pair_value { ( values %{ $_[0] } )[0] }
     sub create_header   { $ACTION_PACK->create( @_ ) }
     sub create_date     { $ACTION_PACK->create( 'DateHeader' => shift ) }
     sub inflate_headers { $ACTION_PACK->inflate( @_ ) }
+    sub get_action_pack { $ACTION_PACK }
 }
 
 sub bind_path {
     my ($spec, $path) = @_;
-    my @parts = split /\// => $path;
-    my @spec  = split /\// => $spec;
+    my @parts = grep { $_ } split /\// => $path;
+    my @spec  = grep { $_ } split /\// => $spec;
 
     my @results;
     foreach my $i ( 0 .. $#spec ) {
         if ( $spec[ $i ] =~ /^\*$/ ) {
-            push @results => @parts[ $i .. $#parts ];
+            push @results => @parts;
+            @parts = ();
             last;
         }
         elsif ( $spec[ $i ] =~ /^\:/ ) {
-            return unless defined $parts[ $i ];
-            push @results => $parts[ $i ];
+            return unless defined $parts[ 0 ];
+            push @results => shift @parts;
         }
         elsif ( $spec[ $i ] =~ /^\?\:/ ) {
-            push @results => $parts[ $i ] if defined $parts[ $i ];
+            push @results => shift @parts
+                if defined $parts[ 0 ];
         }
         else {
-            return unless defined $parts[ $i ];
-            return unless $spec[$i] eq $parts[$i];
+            return unless defined $parts[ 0 ];
+            return unless $spec[ $i ] eq $parts[ 0 ];
+            shift @parts;
         }
     }
+
+    return if @parts;
 
     wantarray
         ? @results
@@ -71,7 +77,7 @@ sub bind_path {
 
 1;
 
-
+__END__
 
 =pod
 
@@ -81,7 +87,7 @@ Web::Machine::Util - General Utility module
 
 =head1 VERSION
 
-version 0.03
+version 0.04
 
 =head1 SYNOPSIS
 
@@ -143,17 +149,20 @@ makes it easy to use the following idiom:
 
 The C<$path_spec> follows a pretty standard convention. Literal
 path parts must match corresponding literal. Variable path parts
-are prefixed by a colon and are captured for returning later.
-And lastly the "splat" operator (C<*>) is supported and causes
-all the rest of the path segements to be returned. Below are a
-few examples of this:
+are prefixed by a colon and are captured for returning later, if
+a question mark (?) prefixes the colon, that element will be
+considered optional. And lastly the "splat" operator (C<*>) is
+supported and causes all the rest of the path segements to be
+returned. Below are a few examples of this:
 
   spec                  path             result
   ------------------------------------------------------------
   /test/:foo/:bar       /test/1/2        ( 1, 2 )
+  /test/:foo/:bar       /test/1/         undef #failure-case
   /test/*               /test/1/2/3      ( 1, 2, 3 )
   /user/:id/:action     /user/1/edit     ( 1, 'edit' )
-  /:id                  /201             ( 201 )
+  /?:id                 /201             ( 201 )
+  /?:id                 /                ( )
 
 This function is kept deliberately simple and it is expected
 that the user will use C<my> in the array form to assign
@@ -165,6 +174,16 @@ In the future we might add a C<bind_path_hash> function which
 captures the variable names as well, but to be honest, if you
 feel you need that, you likely want one of the many excellent
 path dispatching modules available on CPAN.
+
+B<NOTE:> Some care should be taken when using path specs in
+which the only things are either optional parameters
+(prefixed with C<?:>) or the "splat" operator (C<*>)
+as they can return empty arrays, which in certain
+contexts can look like match failure. In these cases you
+can test the match in scalar context to verify, a match
+failure will be C<undef> whereas a match success (in
+which nothing was matched) will return C<0> (indicating
+an array with zero size).
 
 =back
 
@@ -180,7 +199,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
-
-__END__
-

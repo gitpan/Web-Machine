@@ -3,7 +3,7 @@ BEGIN {
   $Web::Machine::FSM::AUTHORITY = 'cpan:STEVAN';
 }
 {
-  $Web::Machine::FSM::VERSION = '0.03';
+  $Web::Machine::FSM::VERSION = '0.04';
 }
 # ABSTRACT: The State Machine runner
 
@@ -123,7 +123,7 @@ sub run {
 
 1;
 
-
+__END__
 
 =pod
 
@@ -133,7 +133,7 @@ Web::Machine::FSM - The State Machine runner
 
 =head1 VERSION
 
-version 0.03
+version 0.04
 
 =head1 SYNOPSIS
 
@@ -192,7 +192,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
-
-__END__
-
