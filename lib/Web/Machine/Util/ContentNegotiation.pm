@@ -3,7 +3,7 @@ BEGIN {
   $Web::Machine::Util::ContentNegotiation::AUTHORITY = 'cpan:STEVAN';
 }
 {
-  $Web::Machine::Util::ContentNegotiation::VERSION = '0.04';
+  $Web::Machine::Util::ContentNegotiation::VERSION = '0.05';
 }
 # ABSTRACT: Module to handle content negotiation
 
@@ -73,7 +73,7 @@ Web::Machine::Util::ContentNegotiation - Module to handle content negotiation
 
 =head1 VERSION
 
-version 0.04
+version 0.05
 
 =head1 SYNOPSIS
 

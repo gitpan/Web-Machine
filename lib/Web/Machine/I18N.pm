@@ -3,7 +3,7 @@ BEGIN {
   $Web::Machine::I18N::AUTHORITY = 'cpan:STEVAN';
 }
 {
-  $Web::Machine::I18N::VERSION = '0.04';
+  $Web::Machine::I18N::VERSION = '0.05';
 }
 # ABSTRACT: The I18N support for HTTP information
 
@@ -24,7 +24,7 @@ Web::Machine::I18N - The I18N support for HTTP information
 
 =head1 VERSION
 
-version 0.04
+version 0.05
 
 =head1 SYNOPSIS
 

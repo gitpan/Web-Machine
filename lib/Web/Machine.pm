@@ -3,7 +3,7 @@ BEGIN {
   $Web::Machine::AUTHORITY = 'cpan:STEVAN';
 }
 {
-  $Web::Machine::VERSION = '0.04';
+  $Web::Machine::VERSION = '0.05';
 }
 # ABSTRACT: A Perl port of WebMachine
 
@@ -78,7 +78,7 @@ Web::Machine - A Perl port of WebMachine
 
 =head1 VERSION
 
-version 0.04
+version 0.05
 
 =head1 SYNOPSIS
 

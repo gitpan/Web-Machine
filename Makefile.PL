@@ -19,7 +19,8 @@ my %WriteMakefileArgs = (
     "Plack::Test" => 0,
     "Plack::Util" => 0,
     "Test::Fatal" => "0.003",
-    "Test::More" => "0.88"
+    "Test::More" => "0.88",
+    "Test::NoWarnings" => 0
   },
   "CONFIGURE_REQUIRES" => {
     "ExtUtils::MakeMaker" => "6.30"
@@ -48,7 +49,7 @@ my %WriteMakefileArgs = (
     "strict" => 0,
     "warnings" => 0
   },
-  "VERSION" => "0.04",
+  "VERSION" => "0.05",
   "test" => {
     "TESTS" => "t/*.t t/600-yapc-talk-examples/*.t"
   }

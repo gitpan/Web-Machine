@@ -3,7 +3,7 @@ BEGIN {
   $Web::Machine::FSM::States::AUTHORITY = 'cpan:STEVAN';
 }
 {
-  $Web::Machine::FSM::States::VERSION = '0.04';
+  $Web::Machine::FSM::States::VERSION = '0.05';
 }
 # ABSTRACT: The States for Web Machine
 
@@ -162,7 +162,7 @@ sub b8 {
     }
     # if we just get back true, then
     # move onto the next state
-    elsif ( "$result" eq "1" ) {
+    elsif ( defined $result && "$result" eq "1" ) {
         return \&b7
     }
     # anything else will either be
@@ -703,7 +703,7 @@ Web::Machine::FSM::States - The States for Web Machine
 
 =head1 VERSION
 
-version 0.04
+version 0.05
 
 =head1 SYNOPSIS
 

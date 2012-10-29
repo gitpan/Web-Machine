@@ -49,6 +49,7 @@ t/010-resources/B7b.pm
 t/010-resources/B8.pm
 t/010-resources/B8b.pm
 t/010-resources/B8c.pm
+t/010-resources/B8d.pm
 t/010-resources/B9.pm
 t/010-resources/C4.pm
 t/010-resources/D5.pm
