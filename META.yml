@@ -4,14 +4,22 @@ author:
   - 'Stevan Little <stevan.little@iinteractive.com>'
 build_requires:
   FindBin: 0
+  GD::Simple: 0
+  HTTP::Message::PSGI: 0
   HTTP::Request::Common: 0
+  HTTP::Response: 0
+  JSON: 0
   JSON::XS: 0
   MIME::Base64: 0
+  Net::HTTP: 0
+  Path::Class: 0
+  Plack::Runner: 0
   Plack::Test: 0
-  Plack::Util: 0
   Test::Fatal: 0.003
   Test::More: 0.88
   Test::NoWarnings: 0
+  Test::TCP: 0
+  base: 0
 configure_requires:
   ExtUtils::MakeMaker: 6.30
 dynamic_config: 0
@@ -28,17 +36,22 @@ requires:
   HTTP::Headers::ActionPack: 0.04
   HTTP::Status: 0
   Hash::MultiValue: 0
+  IO::Handle::Util: 0
   List::Util: 0
   Locale::Maketext: 0
   Plack: 0
   Plack::Component: 0
   Plack::Request: 0
   Plack::Response: 0
+  Plack::Util: 0
   Scalar::Util: 0
   Sub::Exporter: 0
   Try::Tiny: 0
   parent: 0
   strict: 0
   warnings: 0
-version: 0.05
+resources:
+  bugtracker: http://rt.cpan.org/NoAuth/Bugs.html?Dist=Web::Machine
+  repository: https://github.com/stevan/webmachine-perl.git
+version: 0.06
 x_authority: cpan:STEVAN

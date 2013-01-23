@@ -3,7 +3,7 @@ BEGIN {
   $Web::Machine::AUTHORITY = 'cpan:STEVAN';
 }
 {
-  $Web::Machine::VERSION = '0.05';
+  $Web::Machine::VERSION = '0.06';
 }
 # ABSTRACT: A Perl port of WebMachine
 
@@ -46,7 +46,8 @@ sub create_resource {
     my ($self, $request) = @_;
     $self->{'resource'}->new(
         request  => $request,
-        response => $request->new_response
+        response => $request->new_response,
+        @{ $self->{'resource_args'} || [] },
     );
 }
 
@@ -62,8 +63,33 @@ sub call {
     my $resource = $self->create_resource( $request );
     my $fsm      = $self->create_fsm;
 
-    my $response = $fsm->run( $resource );
-    $self->finalize_response( $response );
+    if ($self->{'streaming'}) {
+        return sub {
+            my $responder = shift;
+
+            my $response = $self->finalize_response( $fsm->run( $resource ) );
+
+            if (my $cb = $env->{'web.machine.streaming_push'}) {
+                pop @$response;
+                my $writer = $responder->($response);
+                $cb->($writer);
+            }
+            else {
+                $responder->($response);
+            }
+        }
+    }
+    else {
+        my $response = $self->finalize_response( $fsm->run( $resource ) );
+
+        if ($env->{'web.machine.streaming_push'}) {
+            die "Can't do a streaming push response "
+              . "unless the 'streaming' option was set";
+        }
+        else {
+            return $response;
+        }
+    }
 }
 
 1;
@@ -78,7 +104,7 @@ Web::Machine - A Perl port of WebMachine
 
 =head1 VERSION
 
-version 0.05
+version 0.06
 
 =head1 SYNOPSIS
 
@@ -136,10 +162,15 @@ set forward by that module.
 
 =over 4
 
-=item C<new( resource => $resource_classname, ?tracing => 1|0 )>
+=item C<< new( resource => $resource_classname, ?resource_args => $arg_list, ?tracing => 1|0, ?streaming => 1|0 ) >>
 
-The constructor expects to get a C<$resource_classname> and can take an optional
-C<tracing> parameter which it will pass onto the L<Web::Machine::FSM>.
+The constructor expects to get a C<$resource_classname>, which it will use to
+create an instance of the resource class. If that class requires any additional
+arguments, they can be specified with the C<resource_args> parameter. It can
+also take an optional C<tracing> parameter which it will pass onto the
+L<Web::Machine::FSM>, and an optional C<streaming> parameter, which if true
+will run the request in a L<PSGI> streaming response, which can be useful if
+you need to run your content generation asynchronously.
 
 =item C<inflate_request( $env )>
 

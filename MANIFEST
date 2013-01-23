@@ -35,6 +35,7 @@ lib/Web/Machine/Util/BodyEncoding.pm
 lib/Web/Machine/Util/ContentNegotiation.pm
 t/000-load.t
 t/001-basic.t
+t/002-basic-content-type-handlers.t
 t/010-resource-tests.t
 t/010-resources/B10.pm
 t/010-resources/B11.pm
@@ -104,7 +105,10 @@ t/010-resources/P11d.pm
 t/010-resources/P11e.pm
 t/010-resources/P3.pm
 t/010-resources/P3b.pm
+t/011-resource-500-logging.t
 t/020-post-w-redirect.t
+t/030-streaming.t
+t/031-streaming-push.t
 t/300-content-negotiation-media-type.t
 t/301-content-negotiation-language.t
 t/302-content-negotiation-charset.t
@@ -113,6 +117,7 @@ t/304-content-negotiation-match-media-type.t
 t/400-bind-path.t
 t/500-example-hello-word.t
 t/501-example-env-resource.t
+t/502-example-long-poll.t
 t/600-yapc-talk-examples/000-basic.t
 t/600-yapc-talk-examples/001-basic.t
 t/600-yapc-talk-examples/002-basic.t
@@ -125,7 +130,7 @@ t/600-yapc-talk-examples/031-postback-w-json.t
 t/600-yapc-talk-examples/032-postback-w-auth.t
 t/600-yapc-talk-examples/033-postback-w-hateoas.t
 t/600-yapc-talk-examples/100-add-caching.t
-t/600-yapc-talk-examples/110-service-unavabilable.t
+t/600-yapc-talk-examples/110-service-unavailable.t
 t/600-yapc-talk-examples/120-bind-path.t
 t/600-yapc-talk-examples/130-tracing-header.t
 weaver.ini

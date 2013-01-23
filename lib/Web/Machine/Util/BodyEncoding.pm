@@ -3,7 +3,7 @@ BEGIN {
   $Web::Machine::Util::BodyEncoding::AUTHORITY = 'cpan:STEVAN';
 }
 {
-  $Web::Machine::Util::BodyEncoding::VERSION = '0.05';
+  $Web::Machine::Util::BodyEncoding::VERSION = '0.06';
 }
 # ABSTRACT: Module to handle body encoding
 
@@ -20,13 +20,14 @@ use Sub::Exporter -setup => {
 };
 
 sub encode_body_if_set {
-    my ($resource, $response, $metadata) = @_;
-    encode_body( $resource, $response, $metadata ) if $response->body;
+    my ($resource, $response) = @_;
+    encode_body( $resource, $response ) if $response->body;
 }
 
 sub encode_body {
-    my ($resource, $response, $metadata) = @_;
+    my ($resource, $response) = @_;
 
+    my $metadata        = $resource->request->env->{'web.machine.context'};
     my $chosen_encoding = $metadata->{'Content-Encoding'};
     my $encoder         = $resource->encodings_provided->{ $chosen_encoding };
 
@@ -34,20 +35,13 @@ sub encode_body {
     my $charsetter      = $resource->charsets_provided
                         && (first { $_ && $chosen_charset && pair_key( $_ ) eq $chosen_charset } @{ $resource->charsets_provided })
                         || sub { $_[1] };
-    # TODO:
-    # Make this support the other
-    # body types that Plack supports
-    # (arrays, code refs, etc).
-    # - SL
-    $response->body([
-        $resource->$encoder(
-            $resource->$charsetter(
-                $response->body
-            )
-        )
-    ]);
 
-    $response->header( 'Content-Length' => length join "" => @{ $response->body } );
+    push @{ $resource->request->env->{'web.machine.content_filters'} ||= [] },
+        sub {
+            my $chunk = shift;
+            return unless defined $chunk;
+            return $resource->$encoder($resource->$charsetter($chunk));
+        };
 }
 
 
@@ -63,7 +57,7 @@ Web::Machine::Util::BodyEncoding - Module to handle body encoding
 
 =head1 VERSION
 
-version 0.05
+version 0.06
 
 =head1 SYNOPSIS
 

@@ -3,7 +3,7 @@ BEGIN {
   $Web::Machine::Resource::AUTHORITY = 'cpan:STEVAN';
 }
 {
-  $Web::Machine::Resource::VERSION = '0.05';
+  $Web::Machine::Resource::VERSION = '0.06';
 }
 # ABSTRACT: A base resource class
 
@@ -83,7 +83,7 @@ Web::Machine::Resource - A base resource class
 
 =head1 VERSION
 
-version 0.05
+version 0.06
 
 =head1 SYNOPSIS
 
@@ -251,7 +251,7 @@ an ARRAY ref of strings in all capitals.
 
 Defaults to C<['GET','HEAD']>.
 
-=items C<known_methods>
+=item C<known_methods>
 
 HTTP methods that are known to the resource. Like C<allowed_methods>,
 this must return an ARRAY ref of strings in all capitals. One could

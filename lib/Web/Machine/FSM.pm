@@ -3,13 +3,15 @@ BEGIN {
   $Web::Machine::FSM::AUTHORITY = 'cpan:STEVAN';
 }
 {
-  $Web::Machine::FSM::VERSION = '0.05';
+  $Web::Machine::FSM::VERSION = '0.06';
 }
 # ABSTRACT: The State Machine runner
 
 use strict;
 use warnings;
 
+use IO::Handle::Util 'io_from_getline';
+use Plack::Util;
 use Try::Tiny;
 use HTTP::Status qw[ is_error ];
 use Web::Machine::I18N;
@@ -40,6 +42,7 @@ sub run {
     my $request  = $resource->request;
     my $response = $resource->response;
     my $metadata = {};
+    $request->env->{'web.machine.context'} = $metadata;
 
     my @trace;
     my $tracing = $self->tracing;
@@ -58,6 +61,7 @@ sub run {
                 # - SL
                 warn "! ERROR with " . ($result || 'undef') . "\n" if $DEBUG;
                 $response->status( 500 );
+                $response->header( 'Content-Type' => 'text/plain' );
                 $response->body( [ "Got bad state: " . ($result || 'undef') ] );
                 last;
             }
@@ -73,16 +77,7 @@ sub run {
                     # - SL
                     my $lang = Web::Machine::I18N->get_handle( $metadata->{'Language'} || 'en' )
                         or die "Could not get language handle for " . $metadata->{'Language'};
-                    # TODO:
-                    # The reality is that we should be
-                    # setting the Content-Length, the
-                    # Content-Type and perhaps even the
-                    # Content-Language (assuming none
-                    # of them aren't already set). However
-                    # these are just error cases, so I
-                    # question the level of importance.
-                    # In other words,.. patches welcome.
-                    # - SL
+                    $response->header( 'Content-Type' => 'text/plain' );
                     $response->body([ $lang->maketext( $$result ) ]);
                 }
 
@@ -104,6 +99,11 @@ sub run {
         # We should be I18N the errors
         # - SL
         warn $_ if $DEBUG;
+
+        if ( $request->logger ) {
+            $request->logger->( { level => 'error', message => $_ } );
+        }
+
         $response->status( 500 );
 
         # NOTE:
@@ -114,11 +114,42 @@ sub run {
         $metadata->{'exception'} = $_;
     };
 
+    $self->filter_response( $resource )
+        unless $request->env->{'web.machine.streaming_push'};
     $resource->finish_request( $metadata );
     $response->header( $self->tracing_header, (join ',' => @trace) )
         if $tracing;
 
     $response;
+}
+
+sub filter_response {
+    my $self = shift;
+    my ($resource) = @_;
+
+    my $response = $resource->response;
+    my $filters = $resource->request->env->{'web.machine.content_filters'};
+
+    # XXX patch Plack::Response to make _body not private?
+    my $body = $response->_body;
+
+    for my $filter (@$filters) {
+        if (ref($body) eq 'ARRAY') {
+            @$body = map { $filter->($_) } @$body;
+        }
+        else {
+            my $old_body = $body;
+            $body = io_from_getline sub { $filter->($old_body->getline) };
+            $response->body($body);
+        }
+    }
+
+    if (ref($body) eq 'ARRAY'
+     && !Plack::Util::status_with_no_entity_body($response->status)) {
+        $response->header(
+            'Content-Length' => Plack::Util::content_length($body)
+        );
+    }
 }
 
 1;
@@ -133,7 +164,7 @@ Web::Machine::FSM - The State Machine runner
 
 =head1 VERSION
 
-version 0.05
+version 0.06
 
 =head1 SYNOPSIS
 
