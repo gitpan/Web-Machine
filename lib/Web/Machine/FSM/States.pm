@@ -3,7 +3,7 @@ BEGIN {
   $Web::Machine::FSM::States::AUTHORITY = 'cpan:STEVAN';
 }
 {
-  $Web::Machine::FSM::States::VERSION = '0.06';
+  $Web::Machine::FSM::States::VERSION = '0.07';
 }
 # ABSTRACT: The States for Web Machine
 
@@ -725,7 +725,7 @@ Web::Machine::FSM::States - The States for Web Machine
 
 =head1 VERSION
 
-version 0.06
+version 0.07
 
 =head1 SYNOPSIS
 

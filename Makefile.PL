@@ -13,21 +13,16 @@ my %WriteMakefileArgs = (
   "AUTHOR" => "Stevan Little <stevan.little\@iinteractive.com>",
   "BUILD_REQUIRES" => {
     "FindBin" => 0,
-    "GD::Simple" => 0,
     "HTTP::Message::PSGI" => 0,
     "HTTP::Request::Common" => 0,
     "HTTP::Response" => 0,
-    "JSON" => 0,
-    "JSON::XS" => 0,
     "MIME::Base64" => 0,
     "Net::HTTP" => 0,
-    "Path::Class" => 0,
     "Plack::Runner" => 0,
     "Plack::Test" => 0,
     "Test::Fatal" => "0.003",
     "Test::More" => "0.88",
     "Test::NoWarnings" => 0,
-    "Test::TCP" => 0,
     "base" => 0
   },
   "CONFIGURE_REQUIRES" => {
@@ -59,7 +54,7 @@ my %WriteMakefileArgs = (
     "strict" => 0,
     "warnings" => 0
   },
-  "VERSION" => "0.06",
+  "VERSION" => "0.07",
   "test" => {
     "TESTS" => "t/*.t t/600-yapc-talk-examples/*.t"
   }
