@@ -3,7 +3,7 @@ BEGIN {
   $Web::Machine::FSM::AUTHORITY = 'cpan:STEVAN';
 }
 {
-  $Web::Machine::FSM::VERSION = '0.07';
+  $Web::Machine::FSM::VERSION = '0.08';
 }
 # ABSTRACT: The State Machine runner
 
@@ -164,7 +164,7 @@ Web::Machine::FSM - The State Machine runner
 
 =head1 VERSION
 
-version 0.07
+version 0.08
 
 =head1 SYNOPSIS
 

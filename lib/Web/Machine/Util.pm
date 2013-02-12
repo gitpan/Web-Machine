@@ -3,7 +3,7 @@ BEGIN {
   $Web::Machine::Util::AUTHORITY = 'cpan:STEVAN';
 }
 {
-  $Web::Machine::Util::VERSION = '0.07';
+  $Web::Machine::Util::VERSION = '0.08';
 }
 # ABSTRACT: General Utility module
 
@@ -87,7 +87,7 @@ Web::Machine::Util - General Utility module
 
 =head1 VERSION
 
-version 0.07
+version 0.08
 
 =head1 SYNOPSIS
 

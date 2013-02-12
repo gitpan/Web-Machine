@@ -3,7 +3,7 @@ BEGIN {
   $Web::Machine::Resource::AUTHORITY = 'cpan:STEVAN';
 }
 {
-  $Web::Machine::Resource::VERSION = '0.07';
+  $Web::Machine::Resource::VERSION = '0.08';
 }
 # ABSTRACT: A base resource class
 
@@ -35,6 +35,12 @@ sub init {}
 
 sub request  { (shift)->{'request'}  }
 sub response { (shift)->{'response'} }
+
+# NOTE:
+# this is where we deviate from
+# the Erlang/Ruby versions
+# - SL
+sub create_path_after_handler { 0 }
 
 sub resource_exists           { 1 }
 sub service_available         { 1 }
@@ -83,7 +89,7 @@ Web::Machine::Resource - A base resource class
 
 =head1 VERSION
 
-version 0.07
+version 0.08
 
 =head1 SYNOPSIS
 
@@ -291,6 +297,15 @@ Default is false.
 This will be called on a POST request if post_is_create? returns
 true. The path returned should be a valid URI part following the
 dispatcher prefix.
+
+=item C<create_path_after_handler>
+
+This changes the behavior of C<create_path> so that it will fire
+I<after> the content handler has processed the request body. This
+allows the creation of paths that are more tightly tied to the
+newly created entity.
+
+Default is false.
 
 =item C<base_uri>
 

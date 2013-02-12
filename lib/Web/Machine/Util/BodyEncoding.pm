@@ -3,7 +3,7 @@ BEGIN {
   $Web::Machine::Util::BodyEncoding::AUTHORITY = 'cpan:STEVAN';
 }
 {
-  $Web::Machine::Util::BodyEncoding::VERSION = '0.07';
+  $Web::Machine::Util::BodyEncoding::VERSION = '0.08';
 }
 # ABSTRACT: Module to handle body encoding
 
@@ -57,7 +57,7 @@ Web::Machine::Util::BodyEncoding - Module to handle body encoding
 
 =head1 VERSION
 
-version 0.07
+version 0.08
 
 =head1 SYNOPSIS
 
