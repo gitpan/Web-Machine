@@ -3,7 +3,7 @@ BEGIN {
   $Web::Machine::Util::AUTHORITY = 'cpan:STEVAN';
 }
 {
-  $Web::Machine::Util::VERSION = '0.08';
+  $Web::Machine::Util::VERSION = '0.09';
 }
 # ABSTRACT: General Utility module
 
@@ -14,7 +14,7 @@ use Carp         qw[ confess ];
 use Scalar::Util qw[ blessed ];
 use List::Util   qw[ first ];
 
-use HTTP::Headers::ActionPack;
+use HTTP::Headers::ActionPack 0.04;
 
 use Sub::Exporter -setup => {
     exports => [qw[
@@ -87,7 +87,7 @@ Web::Machine::Util - General Utility module
 
 =head1 VERSION
 
-version 0.08
+version 0.09
 
 =head1 SYNOPSIS
 
@@ -96,7 +96,7 @@ version 0.08
 =head1 DESCRIPTION
 
 This is just a basic utility module used internally by
-L<Web::Machine>. There is no real user servicable parts
+L<Web::Machine>. There are no real user serviceable parts
 in here.
 
 =head1 FUNCTIONS
@@ -152,7 +152,7 @@ path parts must match corresponding literal. Variable path parts
 are prefixed by a colon and are captured for returning later, if
 a question mark (?) prefixes the colon, that element will be
 considered optional. And lastly the "splat" operator (C<*>) is
-supported and causes all the rest of the path segements to be
+supported and causes all the rest of the path segments to be
 returned. Below are a few examples of this:
 
   spec                  path             result
@@ -190,6 +190,40 @@ an array with zero size).
 =head1 AUTHOR
 
 Stevan Little <stevan.little@iinteractive.com>
+
+=head1 CONTRIBUTORS
+
+=over 4
+
+=item *
+
+Andrew Nelson <anelson@cpan.org>
+
+=item *
+
+Dave Rolsky <autarch@urth.org>
+
+=item *
+
+Fayland Lam <fayland@gmail.com>
+
+=item *
+
+Gregory Oschwald <goschwald@maxmind.com>
+
+=item *
+
+Jesse Luehrs <doy@tozt.net>
+
+=item *
+
+John SJ Anderson <genehack@genehack.org>
+
+=item *
+
+Olaf Alders <olaf@wundersolutions.com>
+
+=back
 
 =head1 COPYRIGHT AND LICENSE
 

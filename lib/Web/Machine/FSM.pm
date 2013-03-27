@@ -3,7 +3,7 @@ BEGIN {
   $Web::Machine::FSM::AUTHORITY = 'cpan:STEVAN';
 }
 {
-  $Web::Machine::FSM::VERSION = '0.08';
+  $Web::Machine::FSM::VERSION = '0.09';
 }
 # ABSTRACT: The State Machine runner
 
@@ -164,7 +164,7 @@ Web::Machine::FSM - The State Machine runner
 
 =head1 VERSION
 
-version 0.08
+version 0.09
 
 =head1 SYNOPSIS
 
@@ -214,6 +214,40 @@ the state machine.
 =head1 AUTHOR
 
 Stevan Little <stevan.little@iinteractive.com>
+
+=head1 CONTRIBUTORS
+
+=over 4
+
+=item *
+
+Andrew Nelson <anelson@cpan.org>
+
+=item *
+
+Dave Rolsky <autarch@urth.org>
+
+=item *
+
+Fayland Lam <fayland@gmail.com>
+
+=item *
+
+Gregory Oschwald <goschwald@maxmind.com>
+
+=item *
+
+Jesse Luehrs <doy@tozt.net>
+
+=item *
+
+John SJ Anderson <genehack@genehack.org>
+
+=item *
+
+Olaf Alders <olaf@wundersolutions.com>
+
+=back
 
 =head1 COPYRIGHT AND LICENSE
 

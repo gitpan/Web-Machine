@@ -3,13 +3,14 @@ BEGIN {
   $Web::Machine::AUTHORITY = 'cpan:STEVAN';
 }
 {
-  $Web::Machine::VERSION = '0.08';
+  $Web::Machine::VERSION = '0.09';
 }
-# ABSTRACT: A Perl port of WebMachine
+# ABSTRACT: A Perl port of Webmachine
 
 use strict;
 use warnings;
 
+use Try::Tiny;
 use Carp         qw[ confess ];
 use Scalar::Util qw[ blessed ];
 
@@ -59,7 +60,11 @@ sub finalize_response {
 sub call {
     my ($self, $env) = @_;
 
-    my $request  = $self->inflate_request( $env );
+    my $request  = try { $self->inflate_request( $env ) };
+
+    return $self->finalize_response( Plack::Response->new( 400 ) )
+        unless defined $request;
+
     my $resource = $self->create_resource( $request );
     my $fsm      = $self->create_fsm;
 
@@ -100,11 +105,11 @@ __END__
 
 =head1 NAME
 
-Web::Machine - A Perl port of WebMachine
+Web::Machine - A Perl port of Webmachine
 
 =head1 VERSION
 
-version 0.08
+version 0.09
 
 =head1 SYNOPSIS
 
@@ -138,10 +143,11 @@ version 0.08
 
 =head1 DESCRIPTION
 
-This is a port of L<Webmachine|https://github.com/basho/webmachine>,
-actually it is much closer to L<the ruby version|https://github.com/seancribbs/webmachine-ruby>, with
-a little bit of L<the javascript version|https://github.com/tautologistics/nodemachine>
-and even some of L<the python version|https://github.com/davisp/pywebmachine>
+This is a port of L<Webmachine|https://github.com/basho/webmachine>, actually
+it is much closer to L<the Ruby
+version|https://github.com/seancribbs/webmachine-ruby>, with a little bit of
+L<the JavaScript version|https://github.com/tautologistics/nodemachine> and
+even some of L<the Python version|https://github.com/davisp/pywebmachine>
 thrown in for good measure.
 
 It runs atop L<Plack>, but since it really handles the whole HTTP
@@ -152,7 +158,7 @@ transaction, it is not appropriate to use most middleware modules.
 
 This module is extremely young and it is a port of an pretty young (June 2011)
 module in another language (ruby), which itself is a port of a still kind of
-young module (March 2009) in yet another language (erlang). But that all said,
+young module (March 2009) in yet another language (Erlang). But that all said,
 it really seems like a sane idea and so I stole it and ported it to Perl.
 
 =head1 METHODS
@@ -223,6 +229,40 @@ out information about the path taken through the state machine to STDERR.
 =head1 AUTHOR
 
 Stevan Little <stevan.little@iinteractive.com>
+
+=head1 CONTRIBUTORS
+
+=over 4
+
+=item *
+
+Andrew Nelson <anelson@cpan.org>
+
+=item *
+
+Dave Rolsky <autarch@urth.org>
+
+=item *
+
+Fayland Lam <fayland@gmail.com>
+
+=item *
+
+Gregory Oschwald <goschwald@maxmind.com>
+
+=item *
+
+Jesse Luehrs <doy@tozt.net>
+
+=item *
+
+John SJ Anderson <genehack@genehack.org>
+
+=item *
+
+Olaf Alders <olaf@wundersolutions.com>
+
+=back
 
 =head1 COPYRIGHT AND LICENSE
 

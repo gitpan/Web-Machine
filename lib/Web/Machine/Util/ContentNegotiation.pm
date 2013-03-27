@@ -3,7 +3,7 @@ BEGIN {
   $Web::Machine::Util::ContentNegotiation::AUTHORITY = 'cpan:STEVAN';
 }
 {
-  $Web::Machine::Util::ContentNegotiation::VERSION = '0.08';
+  $Web::Machine::Util::ContentNegotiation::VERSION = '0.09';
 }
 # ABSTRACT: Module to handle content negotiation
 
@@ -73,7 +73,7 @@ Web::Machine::Util::ContentNegotiation - Module to handle content negotiation
 
 =head1 VERSION
 
-version 0.08
+version 0.09
 
 =head1 SYNOPSIS
 
@@ -90,7 +90,7 @@ This module provides a set of functions used in content negotiation.
 =item C<choose_media_type ( $provided, $header )>
 
 Given an ARRAY ref of media type strings and an HTTP header, this will
-return the appropriatly matching L<Web::Machine::Util::MediaType> instance.
+return the matching L<HTTP::Headers::ActionPack::MediaType> instance.
 
 =item C<match_acceptable_media_type ( $to_match, $accepted )>
 
@@ -117,6 +117,40 @@ to negotiate the best encoding match.
 =head1 AUTHOR
 
 Stevan Little <stevan.little@iinteractive.com>
+
+=head1 CONTRIBUTORS
+
+=over 4
+
+=item *
+
+Andrew Nelson <anelson@cpan.org>
+
+=item *
+
+Dave Rolsky <autarch@urth.org>
+
+=item *
+
+Fayland Lam <fayland@gmail.com>
+
+=item *
+
+Gregory Oschwald <goschwald@maxmind.com>
+
+=item *
+
+Jesse Luehrs <doy@tozt.net>
+
+=item *
+
+John SJ Anderson <genehack@genehack.org>
+
+=item *
+
+Olaf Alders <olaf@wundersolutions.com>
+
+=back
 
 =head1 COPYRIGHT AND LICENSE
 

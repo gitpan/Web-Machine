@@ -1,11 +1,12 @@
 Changes
+INSTALL
 LICENSE
 MANIFEST
+META.json
 META.yml
 Makefile.PL
 README
 README.md
-__NOTES__.txt
 dist.ini
 examples/env-resource/app.psgi
 examples/hello-world/app.psgi
@@ -134,4 +135,10 @@ t/600-yapc-talk-examples/100-add-caching.t
 t/600-yapc-talk-examples/110-service-unavailable.t
 t/600-yapc-talk-examples/120-bind-path.t
 t/600-yapc-talk-examples/130-tracing-header.t
+t/700-malformed-auth-bug.t
+t/author-pod-spell.t
+t/release-no-tabs.t
+t/release-pod-linkcheck.t
+t/release-pod-no404s.t
+t/release-pod-syntax.t
 weaver.ini

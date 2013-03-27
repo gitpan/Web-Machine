@@ -3,7 +3,7 @@ BEGIN {
   $Web::Machine::Resource::AUTHORITY = 'cpan:STEVAN';
 }
 {
-  $Web::Machine::Resource::VERSION = '0.08';
+  $Web::Machine::Resource::VERSION = '0.09';
 }
 # ABSTRACT: A base resource class
 
@@ -89,7 +89,7 @@ Web::Machine::Resource - A base resource class
 
 =head1 VERSION
 
-version 0.08
+version 0.09
 
 =head1 SYNOPSIS
 
@@ -368,7 +368,7 @@ Default includes only the 'identity' encoding.
 
 If this method is implemented, it should return a list of
 strings with header names that should be included in a given
-response's Vary header. The standard conneg headers (Accept,
+response's Vary header. The standard content negotiation headers (Accept,
 Accept-Encoding, Accept-Charset, Accept-Language) do not need to
 be specified here as Webmachine will add the correct elements of
 those automatically depending on resource behavior.
@@ -451,6 +451,40 @@ must be by modifying the response.
 =head1 AUTHOR
 
 Stevan Little <stevan.little@iinteractive.com>
+
+=head1 CONTRIBUTORS
+
+=over 4
+
+=item *
+
+Andrew Nelson <anelson@cpan.org>
+
+=item *
+
+Dave Rolsky <autarch@urth.org>
+
+=item *
+
+Fayland Lam <fayland@gmail.com>
+
+=item *
+
+Gregory Oschwald <goschwald@maxmind.com>
+
+=item *
+
+Jesse Luehrs <doy@tozt.net>
+
+=item *
+
+John SJ Anderson <genehack@genehack.org>
+
+=item *
+
+Olaf Alders <olaf@wundersolutions.com>
+
+=back
 
 =head1 COPYRIGHT AND LICENSE
 

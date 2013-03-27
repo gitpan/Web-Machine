@@ -9,11 +9,12 @@ use ExtUtils::MakeMaker 6.30;
 
 
 my %WriteMakefileArgs = (
-  "ABSTRACT" => "A Perl port of WebMachine",
+  "ABSTRACT" => "A Perl port of Webmachine",
   "AUTHOR" => "Stevan Little <stevan.little\@iinteractive.com>",
   "BUILD_REQUIRES" => {
     "FindBin" => 0,
     "HTTP::Message::PSGI" => 0,
+    "HTTP::Request" => 0,
     "HTTP::Request::Common" => 0,
     "HTTP::Response" => 0,
     "MIME::Base64" => 0,
@@ -42,7 +43,6 @@ my %WriteMakefileArgs = (
     "IO::Handle::Util" => 0,
     "List::Util" => 0,
     "Locale::Maketext" => 0,
-    "Plack" => 0,
     "Plack::Component" => 0,
     "Plack::Request" => 0,
     "Plack::Response" => 0,
@@ -54,7 +54,7 @@ my %WriteMakefileArgs = (
     "strict" => 0,
     "warnings" => 0
   },
-  "VERSION" => "0.08",
+  "VERSION" => "0.09",
   "test" => {
     "TESTS" => "t/*.t t/600-yapc-talk-examples/*.t"
   }

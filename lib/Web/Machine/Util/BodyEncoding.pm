@@ -3,7 +3,7 @@ BEGIN {
   $Web::Machine::Util::BodyEncoding::AUTHORITY = 'cpan:STEVAN';
 }
 {
-  $Web::Machine::Util::BodyEncoding::VERSION = '0.08';
+  $Web::Machine::Util::BodyEncoding::VERSION = '0.09';
 }
 # ABSTRACT: Module to handle body encoding
 
@@ -57,7 +57,7 @@ Web::Machine::Util::BodyEncoding - Module to handle body encoding
 
 =head1 VERSION
 
-version 0.08
+version 0.09
 
 =head1 SYNOPSIS
 
@@ -78,7 +78,7 @@ If the C<$response> has a body, this will call C<encode_body>.
 =item C<encode_body ( $resource, $response, $metadata )>
 
 This will find the right encoding (from the 'Content-Encoding' entry
-in the C<$metadata> HASH ref) adnd the right charset (from the 'Charset'
+in the C<$metadata> HASH ref) and the right charset (from the 'Charset'
 entry in the C<$metadata> HASH ref), then find the right transformers
 in the C<$resource>. After that it will attempt to convert the charset
 and encode the body of the C<$response>. Once completed it will set
@@ -94,6 +94,40 @@ later.
 =head1 AUTHOR
 
 Stevan Little <stevan.little@iinteractive.com>
+
+=head1 CONTRIBUTORS
+
+=over 4
+
+=item *
+
+Andrew Nelson <anelson@cpan.org>
+
+=item *
+
+Dave Rolsky <autarch@urth.org>
+
+=item *
+
+Fayland Lam <fayland@gmail.com>
+
+=item *
+
+Gregory Oschwald <goschwald@maxmind.com>
+
+=item *
+
+Jesse Luehrs <doy@tozt.net>
+
+=item *
+
+John SJ Anderson <genehack@genehack.org>
+
+=item *
+
+Olaf Alders <olaf@wundersolutions.com>
+
+=back
 
 =head1 COPYRIGHT AND LICENSE
 

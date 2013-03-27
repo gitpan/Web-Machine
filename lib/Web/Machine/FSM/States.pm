@@ -3,7 +3,7 @@ BEGIN {
   $Web::Machine::FSM::States::AUTHORITY = 'cpan:STEVAN';
 }
 {
-  $Web::Machine::FSM::States::VERSION = '0.08';
+  $Web::Machine::FSM::States::VERSION = '0.09';
 }
 # ABSTRACT: The States for Web Machine
 
@@ -739,7 +739,7 @@ Web::Machine::FSM::States - The States for Web Machine
 
 =head1 VERSION
 
-version 0.08
+version 0.09
 
 =head1 SYNOPSIS
 
@@ -749,7 +749,7 @@ version 0.08
 
 For now I am going to say that there is nothing to see here and that
 if you really want to know what is going on, you should read the
-source (and consult the diagram linked to below). Eventualy I might
+source (and consult the diagram linked to below). Eventually I might
 try and document this, but for now the task is simply too daunting.
 
 =head1 SEE ALSO
@@ -763,6 +763,40 @@ try and document this, but for now the task is simply too daunting.
 =head1 AUTHOR
 
 Stevan Little <stevan.little@iinteractive.com>
+
+=head1 CONTRIBUTORS
+
+=over 4
+
+=item *
+
+Andrew Nelson <anelson@cpan.org>
+
+=item *
+
+Dave Rolsky <autarch@urth.org>
+
+=item *
+
+Fayland Lam <fayland@gmail.com>
+
+=item *
+
+Gregory Oschwald <goschwald@maxmind.com>
+
+=item *
+
+Jesse Luehrs <doy@tozt.net>
+
+=item *
+
+John SJ Anderson <genehack@genehack.org>
+
+=item *
+
+Olaf Alders <olaf@wundersolutions.com>
+
+=back
 
 =head1 COPYRIGHT AND LICENSE
 
