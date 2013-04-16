@@ -3,7 +3,7 @@ BEGIN {
   $Web::Machine::FSM::AUTHORITY = 'cpan:STEVAN';
 }
 {
-  $Web::Machine::FSM::VERSION = '0.09';
+  $Web::Machine::FSM::VERSION = '0.10';
 }
 # ABSTRACT: The State Machine runner
 
@@ -135,7 +135,7 @@ sub filter_response {
 
     for my $filter (@$filters) {
         if (ref($body) eq 'ARRAY') {
-            @$body = map { $filter->($_) } @$body;
+            $response->body( [ map { $filter->($_) } @$body ] );
         }
         else {
             my $old_body = $body;
@@ -164,7 +164,7 @@ Web::Machine::FSM - The State Machine runner
 
 =head1 VERSION
 
-version 0.09
+version 0.10
 
 =head1 SYNOPSIS
 

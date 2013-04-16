@@ -11,21 +11,7 @@ use ExtUtils::MakeMaker 6.30;
 my %WriteMakefileArgs = (
   "ABSTRACT" => "A Perl port of Webmachine",
   "AUTHOR" => "Stevan Little <stevan.little\@iinteractive.com>",
-  "BUILD_REQUIRES" => {
-    "FindBin" => 0,
-    "HTTP::Message::PSGI" => 0,
-    "HTTP::Request" => 0,
-    "HTTP::Request::Common" => 0,
-    "HTTP::Response" => 0,
-    "MIME::Base64" => 0,
-    "Net::HTTP" => 0,
-    "Plack::Runner" => 0,
-    "Plack::Test" => 0,
-    "Test::Fatal" => "0.003",
-    "Test::More" => "0.88",
-    "Test::NoWarnings" => 0,
-    "base" => 0
-  },
+  "BUILD_REQUIRES" => {},
   "CONFIGURE_REQUIRES" => {
     "ExtUtils::MakeMaker" => "6.30"
   },
@@ -37,7 +23,7 @@ my %WriteMakefileArgs = (
     "B" => 0,
     "Carp" => 0,
     "Data::Dumper" => 0,
-    "HTTP::Headers::ActionPack" => "0.04",
+    "HTTP::Headers::ActionPack" => "0.06",
     "HTTP::Status" => 0,
     "Hash::MultiValue" => 0,
     "IO::Handle::Util" => 0,
@@ -54,12 +40,42 @@ my %WriteMakefileArgs = (
     "strict" => 0,
     "warnings" => 0
   },
-  "VERSION" => "0.09",
+  "TEST_REQUIRES" => {
+    "Encode" => 0,
+    "FindBin" => 0,
+    "HTTP::Message::PSGI" => 0,
+    "HTTP::Request" => 0,
+    "HTTP::Request::Common" => 0,
+    "HTTP::Response" => 0,
+    "MIME::Base64" => 0,
+    "Net::HTTP" => 0,
+    "Plack::Runner" => 0,
+    "Plack::Test" => 0,
+    "Test::FailWarnings" => 0,
+    "Test::Fatal" => "0.003",
+    "Test::More" => "0.88",
+    "base" => 0,
+    "utf8" => 0
+  },
+  "VERSION" => "0.10",
   "test" => {
     "TESTS" => "t/*.t t/600-yapc-talk-examples/*.t"
   }
 );
 
+
+unless ( eval { ExtUtils::MakeMaker->VERSION(6.63_03) } ) {
+  my $tr = delete $WriteMakefileArgs{TEST_REQUIRES};
+  my $br = $WriteMakefileArgs{BUILD_REQUIRES};
+  for my $mod ( keys %$tr ) {
+    if ( exists $br->{$mod} ) {
+      $br->{$mod} = $tr->{$mod} if $tr->{$mod} > $br->{$mod};
+    }
+    else {
+      $br->{$mod} = $tr->{$mod};
+    }
+  }
+}
 
 unless ( eval { ExtUtils::MakeMaker->VERSION(6.56) } ) {
   my $br = delete $WriteMakefileArgs{BUILD_REQUIRES};

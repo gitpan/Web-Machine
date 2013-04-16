@@ -3,14 +3,14 @@ BEGIN {
   $Web::Machine::Util::BodyEncoding::AUTHORITY = 'cpan:STEVAN';
 }
 {
-  $Web::Machine::Util::BodyEncoding::VERSION = '0.09';
+  $Web::Machine::Util::BodyEncoding::VERSION = '0.10';
 }
 # ABSTRACT: Module to handle body encoding
 
 use strict;
 use warnings;
 
-use Web::Machine::Util qw[ first pair_key ];
+use Web::Machine::Util qw[ first pair_key pair_value ];
 
 use Sub::Exporter -setup => {
     exports => [qw[
@@ -31,10 +31,18 @@ sub encode_body {
     my $chosen_encoding = $metadata->{'Content-Encoding'};
     my $encoder         = $resource->encodings_provided->{ $chosen_encoding };
 
-    my $chosen_charset  = $metadata->{'Charset'};
-    my $charsetter      = $resource->charsets_provided
-                        && (first { $_ && $chosen_charset && pair_key( $_ ) eq $chosen_charset } @{ $resource->charsets_provided })
-                        || sub { $_[1] };
+    my $chosen_charset = $metadata->{'Charset'};
+    my $charsetter;
+    if ( $chosen_charset && $resource->charsets_provided ) {
+        $charsetter = pair_value(
+            first {
+                $_ && pair_key($_) eq $chosen_charset;
+            }
+            @{ $resource->charsets_provided }
+        );
+    }
+
+    $charsetter ||= sub { $_[1] };
 
     push @{ $resource->request->env->{'web.machine.content_filters'} ||= [] },
         sub {
@@ -57,7 +65,7 @@ Web::Machine::Util::BodyEncoding - Module to handle body encoding
 
 =head1 VERSION
 
-version 0.09
+version 0.10
 
 =head1 SYNOPSIS
 

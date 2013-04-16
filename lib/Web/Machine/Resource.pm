@@ -3,7 +3,7 @@ BEGIN {
   $Web::Machine::Resource::AUTHORITY = 'cpan:STEVAN';
 }
 {
-  $Web::Machine::Resource::VERSION = '0.09';
+  $Web::Machine::Resource::VERSION = '0.10';
 }
 # ABSTRACT: A base resource class
 
@@ -89,7 +89,7 @@ Web::Machine::Resource - A base resource class
 
 =head1 VERSION
 
-version 0.09
+version 0.10
 
 =head1 SYNOPSIS
 

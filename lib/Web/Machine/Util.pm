@@ -3,7 +3,7 @@ BEGIN {
   $Web::Machine::Util::AUTHORITY = 'cpan:STEVAN';
 }
 {
-  $Web::Machine::Util::VERSION = '0.09';
+  $Web::Machine::Util::VERSION = '0.10';
 }
 # ABSTRACT: General Utility module
 
@@ -14,7 +14,7 @@ use Carp         qw[ confess ];
 use Scalar::Util qw[ blessed ];
 use List::Util   qw[ first ];
 
-use HTTP::Headers::ActionPack 0.04;
+use HTTP::Headers::ActionPack 0.06;
 
 use Sub::Exporter -setup => {
     exports => [qw[
@@ -87,7 +87,7 @@ Web::Machine::Util - General Utility module
 
 =head1 VERSION
 
-version 0.09
+version 0.10
 
 =head1 SYNOPSIS
 

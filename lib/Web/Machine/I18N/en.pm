@@ -3,7 +3,7 @@ BEGIN {
   $Web::Machine::I18N::en::AUTHORITY = 'cpan:STEVAN';
 }
 {
-  $Web::Machine::I18N::en::VERSION = '0.09';
+  $Web::Machine::I18N::en::VERSION = '0.10';
 }
 # ABSTRACT: The English support for I18Ned HTTP information
 
@@ -68,7 +68,7 @@ Web::Machine::I18N::en - The English support for I18Ned HTTP information
 
 =head1 VERSION
 
-version 0.09
+version 0.10
 
 =head1 SYNOPSIS
 

@@ -10,7 +10,11 @@ BEGIN {
     use_ok('Web::Machine::Util::ContentNegotiation', 'choose_charset');
 }
 
-is(choose_charset( [], 'ISO-8859-1' ), 1, '... got nothing back (charset is short circuited)');
+is(
+    choose_charset( [], 'ISO-8859-1' ),
+    1,
+    '... got a 1 back (no choices)'
+);
 
 is(
     choose_charset( [{ "UTF-8", sub {} },{ "US-ASCII", sub {} }], "US-ASCII, UTF-8" ),
@@ -24,11 +28,15 @@ is(
     '... got the right charset back'
 );
 
-is(choose_charset( [{ "UTF-8", sub {} },{ "US-ASCII", sub {} }], 'ISO-8859-1' ), undef, '... got nothing back (charset is short circuited)');
+is(
+   choose_charset( [{ "UTF-8", sub {} },{ "US-ASCII", sub {} }], 'ISO-8859-1' ),
+   'UTF-8',
+   '... got default back when it is acceptable'
+);
 
 is(
     choose_charset( [{ "UtF-8", sub {} },{ "US-ASCII", sub {} }], "iso-8859-1, utf-8" ),
-    'utf-8',
+    'UtF-8',
     '... got the right charset back'
 );
 

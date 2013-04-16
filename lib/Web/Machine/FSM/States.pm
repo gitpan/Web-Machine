@@ -3,7 +3,7 @@ BEGIN {
   $Web::Machine::FSM::States::AUTHORITY = 'cpan:STEVAN';
 }
 {
-  $Web::Machine::FSM::States::VERSION = '0.09';
+  $Web::Machine::FSM::States::VERSION = '0.10';
 }
 # ABSTRACT: The States for Web Machine
 
@@ -477,7 +477,7 @@ sub k13 {
     my ($resource, $request, $response) = @_;
     my @etags = map { _unquote_header( $_ ) } split /\s*\,\s*/ => $request->header('If-None-Match');
     my $etag  = $resource->generate_etag;
-    (grep { $etag eq $_ } @etags) ? \&j18 : \&l13;
+    $etag && (grep { $etag eq $_ } @etags) ? \&j18 : \&l13;
 }
 
 $STATE_DESC{'l5'} = 'moved_temporarily';
@@ -739,7 +739,7 @@ Web::Machine::FSM::States - The States for Web Machine
 
 =head1 VERSION
 
-version 0.09
+version 0.10
 
 =head1 SYNOPSIS
 

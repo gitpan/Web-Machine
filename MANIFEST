@@ -107,8 +107,10 @@ t/010-resources/P11e.pm
 t/010-resources/P3.pm
 t/010-resources/P3b.pm
 t/011-resource-500-logging.t
+t/012-warning-no-etag.t
 t/020-post-w-redirect.t
 t/021-post-w-bypass-n11.t
+t/022-body-encoding.t
 t/030-streaming.t
 t/031-streaming-push.t
 t/300-content-negotiation-media-type.t
