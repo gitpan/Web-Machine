@@ -3,7 +3,7 @@ BEGIN {
   $Web::Machine::AUTHORITY = 'cpan:STEVAN';
 }
 {
-  $Web::Machine::VERSION = '0.10';
+  $Web::Machine::VERSION = '0.11';
 }
 # ABSTRACT: A Perl port of Webmachine
 
@@ -109,7 +109,7 @@ Web::Machine - A Perl port of Webmachine
 
 =head1 VERSION
 
-version 0.10
+version 0.11
 
 =head1 SYNOPSIS
 
@@ -143,16 +143,27 @@ version 0.10
 
 =head1 DESCRIPTION
 
+C<Web::Machine> provides a RESTful web framework modeled as a state
+machine. You define one or more resource classes. Each resource represents a
+single RESTful URI end point, such as a user, an email, etc. The resource
+class can also be the target for C<POST> requests to create a new user, email,
+etc.
+
+Each resource is a state machine, and each request for a resource is handled
+by running the request through that state machine.
+
+C<Web::Machine> is built on top of L<Plack>, but it handles the full request
+and response cycle.
+
+See L<Web::Machine::Manual> for more details on using C<Web::Machine> in
+general, and how C<Web::Machine> and L<Plack> interact.
+
 This is a port of L<Webmachine|https://github.com/basho/webmachine>, actually
 it is much closer to L<the Ruby
 version|https://github.com/seancribbs/webmachine-ruby>, with a little bit of
 L<the JavaScript version|https://github.com/tautologistics/nodemachine> and
 even some of L<the Python version|https://github.com/davisp/pywebmachine>
 thrown in for good measure.
-
-It runs atop L<Plack>, but since it really handles the whole HTTP
-transaction, it is not appropriate to use most middleware modules.
-(NOTE: I will write more about this in the future.)
 
 =head1 CAVEAT
 
@@ -266,7 +277,7 @@ Olaf Alders <olaf@wundersolutions.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2012 by Infinity Interactive, Inc..
+This software is copyright (c) 2013 by Infinity Interactive, Inc..
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

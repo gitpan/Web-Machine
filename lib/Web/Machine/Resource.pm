@@ -3,7 +3,7 @@ BEGIN {
   $Web::Machine::Resource::AUTHORITY = 'cpan:STEVAN';
 }
 {
-  $Web::Machine::Resource::VERSION = '0.10';
+  $Web::Machine::Resource::VERSION = '0.11';
 }
 # ABSTRACT: A base resource class
 
@@ -64,6 +64,7 @@ sub process_post              { 0 }
 sub content_types_provided    { [] }
 sub content_types_accepted    { [] }
 sub charsets_provided         { [] }
+sub default_charset           {}
 sub languages_provided        { [] }
 sub encodings_provided        { { 'identity' => sub { $_[1] } } }
 sub variances                 { [] }
@@ -89,7 +90,7 @@ Web::Machine::Resource - A base resource class
 
 =head1 VERSION
 
-version 0.10
+version 0.11
 
 =head1 SYNOPSIS
 
@@ -168,7 +169,7 @@ Is the client or request authorized?
 Parameter C<$authorization_header> is the contents of the
 'Authorization' header sent by the client, if present.
 
-Returning anything other than true will result in a
+Returning anything other than 1 will result in a
 '401 Unauthorized' response. If a string is returned, it
 will be used as the value in the 'WWW-Authenticate'
 response header, which can also be set manually.
@@ -342,12 +343,67 @@ incoming entity.
 
 =item C<charsets_provided>
 
-If this is anything other than undef, it must be an ARRAY of pairs
-where each pair key is the charset name and the pair value is
-a CODE ref converter which is an arity-1 method which will be called
-on the produced body in a GET and ensure that it is in Charset.
+This specifies the charsets that your resource support. Returning a value from
+this method enable content negotiation based on the client's Accept-Charset
+header.
 
-Default is undef.
+The return value from this method must be an ARRAY ref. Each member of that
+array can be either a string or a HASH ref pair value. If the member is a
+string, it must be a valid character set name for the L<Encode>
+module. Web::Machine will call C<encode()> on the body using this character
+set if you set a body.
+
+  sub charsets_provided {
+      return [ qw( UTF-8 ISO-8859-1 shiftjis ) ];
+  }
+
+If you return a HASHREF pair, the key must be a character set name and the
+value must be a CODE ref. This CODE ref will be called I<as a method> on the
+resource object. It will receive a single parameter, a string to be
+encoded. It is expected to return a scalar containing B<bytes>, not
+characters. This will be used to encode the body you provide.
+
+  sub charsets_provided {
+      return [
+          {
+              'UTF-8' => sub {
+                  my $self   = shift;
+                  my $string = shift;
+                  return make_some_bytes($string),;
+              },
+          },
+          {
+              'ISO-8859-1' => sub {
+                  my $self   = shift;
+                  my $string = shift;
+                  return strip_non_ascii($string),;
+              },
+          },
+      ];
+  }
+
+The character set name will be appended to the Content-Type header returned
+the client.
+
+If a client specifies the same preference for two or more character sets that
+your resource provides, then Web::Machine chooses the first character set in
+the returned ARRAY ref.
+
+B<CAVEAT:> Note that currently C<Web::Machine> does not support the use of
+encodings when the body is returned as a CODE ref. This is a bug to be
+remedied in the future.
+
+Default is an empty list.
+
+=item C<default_charset>
+
+If the client does not provide an Accept-Charset header, this sub is called to
+provide a default charset. The return value must be either a string or a
+hashref consisting of a single pair, where the key is a character set name and
+the value is a subroutine.
+
+This works just like the C<charsets_provided()> method, except that you can
+only return a single value.
 
 =item C<languages_provided>
 
@@ -361,6 +417,10 @@ This should return a HASH of encodings mapped to encoding
 methods for Content-Encodings your resource wants to
 provide. The encoding will be applied to the response body
 automatically by Webmachine.
+
+B<CAVEAT:> Note that currently C<Web::Machine> does not support the use of
+encodings when the body is returned as a CODE ref. This is a bug to be
+remedied in the future.
 
 Default includes only the 'identity' encoding.
 
@@ -488,7 +548,7 @@ Olaf Alders <olaf@wundersolutions.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2012 by Infinity Interactive, Inc..
+This software is copyright (c) 2013 by Infinity Interactive, Inc..
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

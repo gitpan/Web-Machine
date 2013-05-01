@@ -23,7 +23,8 @@ my %WriteMakefileArgs = (
     "B" => 0,
     "Carp" => 0,
     "Data::Dumper" => 0,
-    "HTTP::Headers::ActionPack" => "0.06",
+    "Encode" => 0,
+    "HTTP::Headers::ActionPack" => "0.07",
     "HTTP::Status" => 0,
     "Hash::MultiValue" => 0,
     "IO::Handle::Util" => 0,
@@ -41,7 +42,6 @@ my %WriteMakefileArgs = (
     "warnings" => 0
   },
   "TEST_REQUIRES" => {
-    "Encode" => 0,
     "FindBin" => 0,
     "HTTP::Message::PSGI" => 0,
     "HTTP::Request" => 0,
@@ -57,7 +57,7 @@ my %WriteMakefileArgs = (
     "base" => 0,
     "utf8" => 0
   },
-  "VERSION" => "0.10",
+  "VERSION" => "0.11",
   "test" => {
     "TESTS" => "t/*.t t/600-yapc-talk-examples/*.t"
   }

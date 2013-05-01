@@ -16,7 +16,7 @@ binmode $_, ':encoding(UTF-8)'
     for $tb->output, $tb->failure_output, $tb->todo_output;
 
 {
-    package My::Resource::Test022;
+    package My::Resource::Test022::Base;
     use strict;
     use warnings;
 
@@ -26,6 +26,36 @@ binmode $_, ':encoding(UTF-8)'
 
     sub allowed_methods { [qw[ GET ]] }
     sub content_types_provided { [ { 'text/plain' => 'body' } ] }
+
+    # The o with umlauts is encoded as 0xc3 0xb6 in UTF-8 and as 0xf6 in
+    # ISO-8859-1.
+    our $Body = do {
+        use utf8;
+        "Hellö Wörld";
+    };
+
+    sub body {
+        my $self = shift;
+
+        if ( $self->request->parameters->{stream} ) {
+            my $bytes = encode( 'UTF-8', $Body );
+            open my $fh, '<:encoding(UTF-8)', \$bytes;
+            return $fh;
+        }
+        else {
+            return $Body;
+        }
+    }
+}
+
+{
+    package My::Resource::Test022::Pairs;
+    use strict;
+    use warnings;
+
+    use Encode qw( encode );
+
+    use parent -norequire, 'My::Resource::Test022::Base';
 
     sub encodings_provided {
         return {
@@ -45,23 +75,26 @@ binmode $_, ':encoding(UTF-8)'
         ];
     }
 
-    # The o with umlauts is encoded as 0xc3 0xb6 in UTF-8 and as 0xf6 in
-    # ISO-8859-1.
-    our $Body = do{
-        use utf8;
-        "Hellö Wörld";
-    };
+    sub default_charset {
+        return {
+            'UTF-8' => sub { encode( 'UTF-8', $_[1] ) }
+        };
+    }
+}
 
-    sub body {
-        my $self = shift;
+{
+    package My::Resource::Test022::Strings;
+    use strict;
+    use warnings;
 
-        if ($self->request->parameters->{stream}) {
-            open my $fh, '<:encoding(UTF-8)', \$Body;
-            return $fh;
-        }
-        else {
-            return $Body;
-        }
+    use parent -norequire, 'My::Resource::Test022::Base';
+
+    sub charsets_provided {
+        return [qw( UTF-8 ISO-8859-1 )];
+    }
+
+    sub default_charset {
+        return 'UTF-8';
     }
 }
 
@@ -70,11 +103,9 @@ binmode $_, ':encoding(UTF-8)'
 # to utf8::downgrade on the reponse body. That makes it hard to test how
 # encodings are being handled!
 ok(
-    is_utf8($My::Resource::Test022::Body),
+    is_utf8($My::Resource::Test022::Base::Body),
     'text in resource is marked as UTF-8'
 );
-
-my $app = Web::Machine->new( resource => 'My::Resource::Test022' )->to_app;
 
 my %tests = (
     'UTF-8' => [
@@ -107,16 +138,42 @@ my %tests = (
     ],
 );
 
-for my $stream ( 0, 1 ) {
-    for my $charset ( sort keys %tests ) {
+for my $resource (qw( Pairs Strings )) {
+    my $app = Web::Machine->new(
+        resource => 'My::Resource::Test022::' . $resource )->to_app;
+
+    my $desc = $resource;
+    for my $stream ( 0, 1 ) {
+        $desc .= $stream ? ' - body as stream' : ' - body as arrayref';
+
+        for my $charset ( sort keys %tests ) {
+            test_charset(
+                app            => $app,
+                charset        => $charset,
+                charset_header => 1,
+                bytes          => $tests{$charset},
+                stream         => $stream,
+                description    => "$desc - $charset",
+            );
+        }
+
         test_charset(
-            charset => $charset,
-            bytes   => $tests{$charset},
-            stream  => $stream,
+            app            => $app,
+            charset        => 'UTF-8',
+            charset_header => 0,
+            bytes          => $tests{'UTF-8'},
+            stream         => $stream,
+            description    => "$desc - no Accept-Charset header",
+        );
+
+        next if $resource eq 'Strings';
+
+        test_encoding(
+            app         => $app,
+            stream      => $stream,
+            description => "$desc - encoding test",
         );
     }
-
-    test_encoding( stream => $stream );
 }
 
 done_testing;
@@ -125,39 +182,35 @@ sub test_charset {
     my %args = @_;
 
     my $uri = _uri(%args);
-    my $env = GET(
-        $uri,
-        'Accept-Charset' => $args{charset},
-    )->to_psgi;
 
-    my $response = $app->($env);
+    my @headers
+        = $args{charset_header} ? ( 'Accept-Charset' => $args{charset} ) : ();
+    my $env = GET( $uri, @headers )->to_psgi;
+
+    my $response = $args{app}->($env);
 
     ok(
         $response->[0],
-        _desc( "status code is 200 - Charset: $args{charset}", $args{stream} )
+        "status code is 200 - $args{description}"
     );
 
     my $body = _body( $response, $args{stream} );
 
     ok(
         !is_utf8($body),
-        _desc( "body is bytes, not characters - Charset: $args{charset}", $args{stream} )
+        "body is bytes, not characters -  - $args{description}"
     );
 
     is(
         decode( $args{charset}, $body ),
-        $My::Resource::Test022::Body,
-        _desc(
-            "body decoded as $args{charset} matches original", $args{stream}
-        )
+        $My::Resource::Test022::Base::Body,
+        "body decoded as $args{charset} matches original - $args{description}"
     );
 
     is_deeply(
         [ map { ord($_) } split //, $body ],
         $args{bytes},
-        _desc(
-            "body contains the expected $args{charset} bytes", $args{stream}
-        )
+        "body contains the expected $args{charset} bytes - $args{description}"
     );
 }
 
@@ -171,40 +224,29 @@ sub test_encoding {
         'Accept-Encoding' => 'add-x',
     )->to_psgi;
 
-    my $response = $app->($env);
+    my $response = $args{app}->($env);
 
     ok(
         $response->[0],
-        _desc( 'status code is 200 - Charset & Encoding', $args{stream} )
+        "status code is 200 - $args{description}"
     );
 
     my $body = _body( $response, $args{stream} );
     ok(
         !is_utf8($body),
-        _desc( 'body is bytes, not characters - Charset & Encoding', $args{stream} )
+        "body is bytes, not characters - $args{description}"
     );
 
     is(
         decode( 'UTF-8', $body ),
-        $My::Resource::Test022::Body . 'x',
-        _desc(
-            'body has an x at the end with add-x encoding', $args{stream}
-        )
+        $My::Resource::Test022::Base::Body . 'x',
+        "body has an x at the end with add-x encoding - $args{description}"
     );
 }
 
 sub _uri {
     my %args = @_;
     return $args{stream} ? '/?stream=1' : '/';
-}
-
-sub _desc {
-    my $desc   = shift;
-    my $stream = shift;
-
-    my $suffix = $stream ? 'body as stream' : 'body as arrayref';
-
-    return "$desc - $suffix";
 }
 
 sub _body {

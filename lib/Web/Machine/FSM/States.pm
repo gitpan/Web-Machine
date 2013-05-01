@@ -3,7 +3,7 @@ BEGIN {
   $Web::Machine::FSM::States::AUTHORITY = 'cpan:STEVAN';
 }
 {
-  $Web::Machine::FSM::States::VERSION = '0.10';
+  $Web::Machine::FSM::States::VERSION = '0.11';
 }
 # ABSTRACT: The States for Web Machine
 
@@ -305,6 +305,14 @@ $STATE_DESC{'f6'} = 'accept_encoding_exists';
 sub f6 {
     my ($resource, $request, $response) = @_;
     my $metadata = _metadata($request);
+
+    # If the client doesn't provide an Accept-Charset header we should just
+    # encode with the default.
+    if ( $resource->default_charset && !$request->header('Accept-Charset') ) {
+        my $default = $resource->default_charset;
+        $metadata->{'Charset'} = ref $default ? pair_key($default) : $default;
+    }
+
     if ( my $charset = $metadata->{'Charset'} ) {
         # Add the charset to the content type now ...
         $metadata->{'Content-Type'}->add_param( 'charset' => $charset );
@@ -739,7 +747,7 @@ Web::Machine::FSM::States - The States for Web Machine
 
 =head1 VERSION
 
-version 0.10
+version 0.11
 
 =head1 SYNOPSIS
 
@@ -800,7 +808,7 @@ Olaf Alders <olaf@wundersolutions.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2012 by Infinity Interactive, Inc..
+This software is copyright (c) 2013 by Infinity Interactive, Inc..
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

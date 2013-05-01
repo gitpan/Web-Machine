@@ -3,7 +3,7 @@ BEGIN {
   $Web::Machine::FSM::AUTHORITY = 'cpan:STEVAN';
 }
 {
-  $Web::Machine::FSM::VERSION = '0.10';
+  $Web::Machine::FSM::VERSION = '0.11';
 }
 # ABSTRACT: The State Machine runner
 
@@ -164,7 +164,7 @@ Web::Machine::FSM - The State Machine runner
 
 =head1 VERSION
 
-version 0.10
+version 0.11
 
 =head1 SYNOPSIS
 
@@ -251,7 +251,7 @@ Olaf Alders <olaf@wundersolutions.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2012 by Infinity Interactive, Inc..
+This software is copyright (c) 2013 by Infinity Interactive, Inc..
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

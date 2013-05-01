@@ -3,13 +3,14 @@ BEGIN {
   $Web::Machine::Util::BodyEncoding::AUTHORITY = 'cpan:STEVAN';
 }
 {
-  $Web::Machine::Util::BodyEncoding::VERSION = '0.10';
+  $Web::Machine::Util::BodyEncoding::VERSION = '0.11';
 }
 # ABSTRACT: Module to handle body encoding
 
 use strict;
 use warnings;
 
+use Encode ();
 use Web::Machine::Util qw[ first pair_key pair_value ];
 
 use Sub::Exporter -setup => {
@@ -34,12 +35,16 @@ sub encode_body {
     my $chosen_charset = $metadata->{'Charset'};
     my $charsetter;
     if ( $chosen_charset && $resource->charsets_provided ) {
-        $charsetter = pair_value(
-            first {
-                $_ && pair_key($_) eq $chosen_charset;
+        my $match =             first {
+                my $name = $_ && ref $_ ? pair_key($_) : $_;
+                $name && $name eq $chosen_charset;
             }
-            @{ $resource->charsets_provided }
-        );
+            @{ $resource->charsets_provided };
+
+        $charsetter
+            = ref $match
+            ? pair_value($match)
+            : sub { Encode::encode( $match, $_[1] ) };
     }
 
     $charsetter ||= sub { $_[1] };
@@ -65,7 +70,7 @@ Web::Machine::Util::BodyEncoding - Module to handle body encoding
 
 =head1 VERSION
 
-version 0.10
+version 0.11
 
 =head1 SYNOPSIS
 
@@ -92,10 +97,8 @@ in the C<$resource>. After that it will attempt to convert the charset
 and encode the body of the C<$response>. Once completed it will set
 the C<Content-Length> header in the response as well.
 
-B<NOTE:> At the moment we do not correctly handle all the various
-body types that L<Plack> supports, and we really on handle the case
-where the body is a simple string. We plan to add more support onto this
-later.
+B<CAVEAT:> Note that currently this subroutine doesn't do anything when the
+body is returned as a CODE ref. This is a bug to be remedied in the future.
 
 =back
 
@@ -139,7 +142,7 @@ Olaf Alders <olaf@wundersolutions.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2012 by Infinity Interactive, Inc..
+This software is copyright (c) 2013 by Infinity Interactive, Inc..
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

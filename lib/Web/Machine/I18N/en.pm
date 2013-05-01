@@ -3,7 +3,7 @@ BEGIN {
   $Web::Machine::I18N::en::AUTHORITY = 'cpan:STEVAN';
 }
 {
-  $Web::Machine::I18N::en::VERSION = '0.10';
+  $Web::Machine::I18N::en::VERSION = '0.11';
 }
 # ABSTRACT: The English support for I18Ned HTTP information
 
@@ -68,7 +68,7 @@ Web::Machine::I18N::en - The English support for I18Ned HTTP information
 
 =head1 VERSION
 
-version 0.10
+version 0.11
 
 =head1 SYNOPSIS
 
@@ -120,7 +120,7 @@ Olaf Alders <olaf@wundersolutions.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2012 by Infinity Interactive, Inc..
+This software is copyright (c) 2013 by Infinity Interactive, Inc..
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

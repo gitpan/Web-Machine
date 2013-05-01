@@ -25,11 +25,13 @@ Fayland
 JS
 Luehrs
 Oschwald
+RESTful
 Rolsky
 Stevan
 WebDAV
 Webmachine
 arity
+charsets
 webmachine
 Little
 stevan
@@ -42,8 +44,9 @@ Machine
 Resource
 Util
 BodyEncoding
-FSM
 I18N
 en
+FSM
 ContentNegotiation
 States
+Manual

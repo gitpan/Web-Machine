@@ -3,7 +3,7 @@ BEGIN {
   $Web::Machine::Util::ContentNegotiation::AUTHORITY = 'cpan:STEVAN';
 }
 {
-  $Web::Machine::Util::ContentNegotiation::VERSION = '0.10';
+  $Web::Machine::Util::ContentNegotiation::VERSION = '0.11';
 }
 # ABSTRACT: Module to handle content negotiation
 
@@ -53,7 +53,7 @@ sub choose_language {
 sub choose_charset {
     my ($provided, $header) = @_;
     return 1 if scalar @$provided == 0;
-    $NEGOTIATOR->choose_charset( [ map { pair_key( $_ ) } @$provided ], $header );
+    $NEGOTIATOR->choose_charset( [ map { ref $_ ? pair_key( $_ ) : $_ } @$provided ], $header );
 }
 
 sub choose_encoding {
@@ -73,7 +73,7 @@ Web::Machine::Util::ContentNegotiation - Module to handle content negotiation
 
 =head1 VERSION
 
-version 0.10
+version 0.11
 
 =head1 SYNOPSIS
 
@@ -154,7 +154,7 @@ Olaf Alders <olaf@wundersolutions.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2012 by Infinity Interactive, Inc..
+This software is copyright (c) 2013 by Infinity Interactive, Inc..
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

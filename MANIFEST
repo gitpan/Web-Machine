@@ -30,6 +30,7 @@ lib/Web/Machine/FSM.pm
 lib/Web/Machine/FSM/States.pm
 lib/Web/Machine/I18N.pm
 lib/Web/Machine/I18N/en.pm
+lib/Web/Machine/Manual.pod
 lib/Web/Machine/Resource.pm
 lib/Web/Machine/Util.pm
 lib/Web/Machine/Util/BodyEncoding.pm
