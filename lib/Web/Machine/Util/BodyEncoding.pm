@@ -3,7 +3,7 @@ BEGIN {
   $Web::Machine::Util::BodyEncoding::AUTHORITY = 'cpan:STEVAN';
 }
 {
-  $Web::Machine::Util::BodyEncoding::VERSION = '0.11';
+  $Web::Machine::Util::BodyEncoding::VERSION = '0.12';
 }
 # ABSTRACT: Module to handle body encoding
 
@@ -70,7 +70,7 @@ Web::Machine::Util::BodyEncoding - Module to handle body encoding
 
 =head1 VERSION
 
-version 0.11
+version 0.12
 
 =head1 SYNOPSIS
 
@@ -112,6 +112,10 @@ Stevan Little <stevan.little@iinteractive.com>
 
 =item *
 
+Andreas Marienborg <andreas.marienborg@gmail.com>
+
+=item *
+
 Andrew Nelson <anelson@cpan.org>
 
 =item *
@@ -137,6 +141,10 @@ John SJ Anderson <genehack@genehack.org>
 =item *
 
 Olaf Alders <olaf@wundersolutions.com>
+
+=item *
+
+Thomas Sibley <tsibley@cpan.org>
 
 =back
 

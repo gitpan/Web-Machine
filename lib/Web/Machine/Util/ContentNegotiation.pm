@@ -3,7 +3,7 @@ BEGIN {
   $Web::Machine::Util::ContentNegotiation::AUTHORITY = 'cpan:STEVAN';
 }
 {
-  $Web::Machine::Util::ContentNegotiation::VERSION = '0.11';
+  $Web::Machine::Util::ContentNegotiation::VERSION = '0.12';
 }
 # ABSTRACT: Module to handle content negotiation
 
@@ -73,7 +73,7 @@ Web::Machine::Util::ContentNegotiation - Module to handle content negotiation
 
 =head1 VERSION
 
-version 0.11
+version 0.12
 
 =head1 SYNOPSIS
 
@@ -124,6 +124,10 @@ Stevan Little <stevan.little@iinteractive.com>
 
 =item *
 
+Andreas Marienborg <andreas.marienborg@gmail.com>
+
+=item *
+
 Andrew Nelson <anelson@cpan.org>
 
 =item *
@@ -149,6 +153,10 @@ John SJ Anderson <genehack@genehack.org>
 =item *
 
 Olaf Alders <olaf@wundersolutions.com>
+
+=item *
+
+Thomas Sibley <tsibley@cpan.org>
 
 =back
 

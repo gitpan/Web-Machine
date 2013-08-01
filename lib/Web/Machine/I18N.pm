@@ -3,7 +3,7 @@ BEGIN {
   $Web::Machine::I18N::AUTHORITY = 'cpan:STEVAN';
 }
 {
-  $Web::Machine::I18N::VERSION = '0.11';
+  $Web::Machine::I18N::VERSION = '0.12';
 }
 # ABSTRACT: The I18N support for HTTP information
 
@@ -24,7 +24,7 @@ Web::Machine::I18N - The I18N support for HTTP information
 
 =head1 VERSION
 
-version 0.11
+version 0.12
 
 =head1 SYNOPSIS
 
@@ -43,6 +43,10 @@ Stevan Little <stevan.little@iinteractive.com>
 =head1 CONTRIBUTORS
 
 =over 4
+
+=item *
+
+Andreas Marienborg <andreas.marienborg@gmail.com>
 
 =item *
 
@@ -71,6 +75,10 @@ John SJ Anderson <genehack@genehack.org>
 =item *
 
 Olaf Alders <olaf@wundersolutions.com>
+
+=item *
+
+Thomas Sibley <tsibley@cpan.org>
 
 =back
 

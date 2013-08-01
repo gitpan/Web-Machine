@@ -3,7 +3,7 @@ BEGIN {
   $Web::Machine::AUTHORITY = 'cpan:STEVAN';
 }
 {
-  $Web::Machine::VERSION = '0.11';
+  $Web::Machine::VERSION = '0.12';
 }
 # ABSTRACT: A Perl port of Webmachine
 
@@ -109,7 +109,7 @@ Web::Machine - A Perl port of Webmachine
 
 =head1 VERSION
 
-version 0.11
+version 0.12
 
 =head1 SYNOPSIS
 
@@ -186,7 +186,7 @@ create an instance of the resource class. If that class requires any additional
 arguments, they can be specified with the C<resource_args> parameter. It can
 also take an optional C<tracing> parameter which it will pass onto the
 L<Web::Machine::FSM>, and an optional C<streaming> parameter, which if true
-will run the request in a L<PSGI> streaming response, which can be useful if
+will run the request in a L<PSGI|http://plackperl.org/> streaming response, which can be useful if
 you need to run your content generation asynchronously.
 
 =item C<inflate_request( $env )>
@@ -247,6 +247,10 @@ Stevan Little <stevan.little@iinteractive.com>
 
 =item *
 
+Andreas Marienborg <andreas.marienborg@gmail.com>
+
+=item *
+
 Andrew Nelson <anelson@cpan.org>
 
 =item *
@@ -272,6 +276,10 @@ John SJ Anderson <genehack@genehack.org>
 =item *
 
 Olaf Alders <olaf@wundersolutions.com>
+
+=item *
+
+Thomas Sibley <tsibley@cpan.org>
 
 =back
 

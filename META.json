@@ -4,7 +4,7 @@
       "Stevan Little <stevan.little@iinteractive.com>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 4.300034, CPAN::Meta::Converter version 2.120921",
+   "generated_by" : "Dist::Zilla version 4.300035, CPAN::Meta::Converter version 2.130880",
    "license" : [
       "perl_5"
    ],
@@ -63,6 +63,7 @@
             "Test::Fatal" : "0.003",
             "Test::More" : "0.88",
             "base" : "0",
+            "lib" : "0",
             "utf8" : "0"
          }
       }
@@ -79,16 +80,18 @@
          "web" : "https://github.com/stevan/webmachine-perl"
       }
    },
-   "version" : "0.11",
+   "version" : "0.12",
    "x_authority" : "cpan:STEVAN",
    "x_contributors" : [
+      "Andreas Marienborg <andreas.marienborg@gmail.com>",
       "Andrew Nelson <anelson@cpan.org>",
       "Dave Rolsky <autarch@urth.org>",
       "Fayland Lam <fayland@gmail.com>",
       "Gregory Oschwald <goschwald@maxmind.com>",
       "Jesse Luehrs <doy@tozt.net>",
       "John SJ Anderson <genehack@genehack.org>",
-      "Olaf Alders <olaf@wundersolutions.com>"
+      "Olaf Alders <olaf@wundersolutions.com>",
+      "Thomas Sibley <tsibley@cpan.org>"
    ]
 }
 

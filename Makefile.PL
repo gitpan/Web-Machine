@@ -55,9 +55,10 @@ my %WriteMakefileArgs = (
     "Test::Fatal" => "0.003",
     "Test::More" => "0.88",
     "base" => 0,
+    "lib" => 0,
     "utf8" => 0
   },
-  "VERSION" => "0.11",
+  "VERSION" => "0.12",
   "test" => {
     "TESTS" => "t/*.t t/600-yapc-talk-examples/*.t"
   }
