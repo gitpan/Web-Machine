@@ -3,7 +3,7 @@ BEGIN {
   $Web::Machine::FSM::States::AUTHORITY = 'cpan:STEVAN';
 }
 {
-  $Web::Machine::FSM::States::VERSION = '0.12';
+  $Web::Machine::FSM::States::VERSION = '0.13';
 }
 # ABSTRACT: The States for Web Machine
 
@@ -595,7 +595,7 @@ sub _n11_create_path {
     # where this ends up being useful so I am going to
     # skip it and not bother.
     # - SL
-    $response->header( 'Location' => $new_uri->path );
+    $response->header( 'Location' => $new_uri->path_query );
 }
 
 $STATE_DESC{'n11'} = 'redirect';
@@ -747,7 +747,7 @@ Web::Machine::FSM::States - The States for Web Machine
 
 =head1 VERSION
 
-version 0.12
+version 0.13
 
 =head1 SYNOPSIS
 
@@ -783,6 +783,14 @@ Andreas Marienborg <andreas.marienborg@gmail.com>
 =item *
 
 Andrew Nelson <anelson@cpan.org>
+
+=item *
+
+Arthur Axel 'fREW' Schmidt <frioux@gmail.com>
+
+=item *
+
+Carlos Fernando Avila Gratz <cafe@q1software.com>
 
 =item *
 

@@ -3,7 +3,7 @@ BEGIN {
   $Web::Machine::Util::AUTHORITY = 'cpan:STEVAN';
 }
 {
-  $Web::Machine::Util::VERSION = '0.12';
+  $Web::Machine::Util::VERSION = '0.13';
 }
 # ABSTRACT: General Utility module
 
@@ -87,7 +87,7 @@ Web::Machine::Util - General Utility module
 
 =head1 VERSION
 
-version 0.12
+version 0.13
 
 =head1 SYNOPSIS
 
@@ -202,6 +202,14 @@ Andreas Marienborg <andreas.marienborg@gmail.com>
 =item *
 
 Andrew Nelson <anelson@cpan.org>
+
+=item *
+
+Arthur Axel 'fREW' Schmidt <frioux@gmail.com>
+
+=item *
+
+Carlos Fernando Avila Gratz <cafe@q1software.com>
 
 =item *
 

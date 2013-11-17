@@ -3,7 +3,7 @@ BEGIN {
   $Web::Machine::FSM::AUTHORITY = 'cpan:STEVAN';
 }
 {
-  $Web::Machine::FSM::VERSION = '0.12';
+  $Web::Machine::FSM::VERSION = '0.13';
 }
 # ABSTRACT: The State Machine runner
 
@@ -165,7 +165,7 @@ Web::Machine::FSM - The State Machine runner
 
 =head1 VERSION
 
-version 0.12
+version 0.13
 
 =head1 SYNOPSIS
 
@@ -227,6 +227,14 @@ Andreas Marienborg <andreas.marienborg@gmail.com>
 =item *
 
 Andrew Nelson <anelson@cpan.org>
+
+=item *
+
+Arthur Axel 'fREW' Schmidt <frioux@gmail.com>
+
+=item *
+
+Carlos Fernando Avila Gratz <cafe@q1software.com>
 
 =item *
 

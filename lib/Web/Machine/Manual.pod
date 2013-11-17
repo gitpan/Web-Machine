@@ -11,7 +11,7 @@ Web::Machine::Manual - Learn how to use Web::Machine
 
 =head1 VERSION
 
-version 0.12
+version 0.13
 
 =head1 Web::Machine IN A NUTSHELL
 
@@ -41,8 +41,8 @@ describes what each method can return.
 =head1 Web::Machine and Plack
 
 C<Web::Machine> is built on top of Plack and follows the
-L<PSGI|http://plackperl.org/> spec. You can mix C<Web::Machine> apps with
-other Plack apps using standard Plack tools like L<Plack::Builder>.
+L<PSGI|http://plackperl.org/> spec. You can mix C<Web::Machine> applications
+with other Plack applications using standard Plack tools like L<Plack::Builder>.
 
 =head2 Web::Machine and Plack Middleware
 
@@ -94,6 +94,14 @@ Andreas Marienborg <andreas.marienborg@gmail.com>
 =item *
 
 Andrew Nelson <anelson@cpan.org>
+
+=item *
+
+Arthur Axel 'fREW' Schmidt <frioux@gmail.com>
+
+=item *
+
+Carlos Fernando Avila Gratz <cafe@q1software.com>
 
 =item *
 

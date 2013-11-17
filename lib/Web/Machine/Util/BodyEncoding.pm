@@ -3,13 +3,14 @@ BEGIN {
   $Web::Machine::Util::BodyEncoding::AUTHORITY = 'cpan:STEVAN';
 }
 {
-  $Web::Machine::Util::BodyEncoding::VERSION = '0.12';
+  $Web::Machine::Util::BodyEncoding::VERSION = '0.13';
 }
 # ABSTRACT: Module to handle body encoding
 
 use strict;
 use warnings;
 
+use Scalar::Util qw/ weaken isweak /;
 use Encode ();
 use Web::Machine::Util qw[ first pair_key pair_value ];
 
@@ -52,6 +53,7 @@ sub encode_body {
     push @{ $resource->request->env->{'web.machine.content_filters'} ||= [] },
         sub {
             my $chunk = shift;
+            weaken $resource unless isweak $resource;
             return unless defined $chunk;
             return $resource->$encoder($resource->$charsetter($chunk));
         };
@@ -70,7 +72,7 @@ Web::Machine::Util::BodyEncoding - Module to handle body encoding
 
 =head1 VERSION
 
-version 0.12
+version 0.13
 
 =head1 SYNOPSIS
 
@@ -117,6 +119,14 @@ Andreas Marienborg <andreas.marienborg@gmail.com>
 =item *
 
 Andrew Nelson <anelson@cpan.org>
+
+=item *
+
+Arthur Axel 'fREW' Schmidt <frioux@gmail.com>
+
+=item *
+
+Carlos Fernando Avila Gratz <cafe@q1software.com>
 
 =item *
 

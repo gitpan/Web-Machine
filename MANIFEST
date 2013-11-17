@@ -7,6 +7,7 @@ META.yml
 Makefile.PL
 README
 README.md
+__NOTES__.txt
 dist.ini
 examples/env-resource/app.psgi
 examples/hello-world/app.psgi

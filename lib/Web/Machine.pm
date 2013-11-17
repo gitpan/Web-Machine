@@ -3,7 +3,7 @@ BEGIN {
   $Web::Machine::AUTHORITY = 'cpan:STEVAN';
 }
 {
-  $Web::Machine::VERSION = '0.12';
+  $Web::Machine::VERSION = '0.13';
 }
 # ABSTRACT: A Perl port of Webmachine
 
@@ -13,6 +13,7 @@ use warnings;
 use Try::Tiny;
 use Carp         qw[ confess ];
 use Scalar::Util qw[ blessed ];
+use Module::Runtime qw[ use_package_optimistically ];
 
 use Plack::Request;
 use Plack::Response;
@@ -27,7 +28,7 @@ sub new {
 
     (exists $args{'resource'}
         && (not blessed $args{'resource'})
-            && $args{'resource'}->isa('Web::Machine::Resource'))
+            && use_package_optimistically($args{'resource'})->isa('Web::Machine::Resource'))
                 || confess 'You must pass in a resource for this Web::Machine';
 
     $class->SUPER::new( \%args );
@@ -109,7 +110,7 @@ Web::Machine - A Perl port of Webmachine
 
 =head1 VERSION
 
-version 0.12
+version 0.13
 
 =head1 SYNOPSIS
 
@@ -252,6 +253,14 @@ Andreas Marienborg <andreas.marienborg@gmail.com>
 =item *
 
 Andrew Nelson <anelson@cpan.org>
+
+=item *
+
+Arthur Axel 'fREW' Schmidt <frioux@gmail.com>
+
+=item *
+
+Carlos Fernando Avila Gratz <cafe@q1software.com>
 
 =item *
 

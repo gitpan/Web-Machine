@@ -3,9 +3,9 @@ BEGIN {
   $Web::Machine::I18N::en::AUTHORITY = 'cpan:STEVAN';
 }
 {
-  $Web::Machine::I18N::en::VERSION = '0.12';
+  $Web::Machine::I18N::en::VERSION = '0.13';
 }
-# ABSTRACT: The English support for I18Ned HTTP information
+# ABSTRACT: The English support for I18N-ed HTTP information
 
 use strict;
 use warnings;
@@ -64,11 +64,11 @@ __END__
 
 =head1 NAME
 
-Web::Machine::I18N::en - The English support for I18Ned HTTP information
+Web::Machine::I18N::en - The English support for I18N-ed HTTP information
 
 =head1 VERSION
 
-version 0.12
+version 0.13
 
 =head1 SYNOPSIS
 
@@ -95,6 +95,14 @@ Andreas Marienborg <andreas.marienborg@gmail.com>
 =item *
 
 Andrew Nelson <anelson@cpan.org>
+
+=item *
+
+Arthur Axel 'fREW' Schmidt <frioux@gmail.com>
+
+=item *
+
+Carlos Fernando Avila Gratz <cafe@q1software.com>
 
 =item *
 

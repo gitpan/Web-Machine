@@ -30,6 +30,7 @@ my %WriteMakefileArgs = (
     "IO::Handle::Util" => 0,
     "List::Util" => 0,
     "Locale::Maketext" => 0,
+    "Module::Runtime" => 0,
     "Plack::Component" => 0,
     "Plack::Request" => 0,
     "Plack::Response" => 0,
@@ -58,37 +59,57 @@ my %WriteMakefileArgs = (
     "lib" => 0,
     "utf8" => 0
   },
-  "VERSION" => "0.12",
+  "VERSION" => "0.13",
   "test" => {
     "TESTS" => "t/*.t t/600-yapc-talk-examples/*.t"
   }
 );
 
 
-unless ( eval { ExtUtils::MakeMaker->VERSION(6.63_03) } ) {
-  my $tr = delete $WriteMakefileArgs{TEST_REQUIRES};
-  my $br = $WriteMakefileArgs{BUILD_REQUIRES};
-  for my $mod ( keys %$tr ) {
-    if ( exists $br->{$mod} ) {
-      $br->{$mod} = $tr->{$mod} if $tr->{$mod} > $br->{$mod};
-    }
-    else {
-      $br->{$mod} = $tr->{$mod};
-    }
-  }
-}
+my %FallbackPrereqs = (
+  "B" => 0,
+  "Carp" => 0,
+  "Data::Dumper" => 0,
+  "Encode" => 0,
+  "FindBin" => 0,
+  "HTTP::Headers::ActionPack" => "0.07",
+  "HTTP::Message::PSGI" => 0,
+  "HTTP::Request" => 0,
+  "HTTP::Request::Common" => 0,
+  "HTTP::Response" => 0,
+  "HTTP::Status" => 0,
+  "Hash::MultiValue" => 0,
+  "IO::Handle::Util" => 0,
+  "List::Util" => 0,
+  "Locale::Maketext" => 0,
+  "MIME::Base64" => 0,
+  "Module::Runtime" => 0,
+  "Net::HTTP" => 0,
+  "Plack::Component" => 0,
+  "Plack::Request" => 0,
+  "Plack::Response" => 0,
+  "Plack::Runner" => 0,
+  "Plack::Test" => 0,
+  "Plack::Util" => 0,
+  "Scalar::Util" => 0,
+  "Sub::Exporter" => 0,
+  "Test::FailWarnings" => 0,
+  "Test::Fatal" => "0.003",
+  "Test::More" => "0.88",
+  "Try::Tiny" => 0,
+  "base" => 0,
+  "lib" => 0,
+  "parent" => 0,
+  "strict" => 0,
+  "utf8" => 0,
+  "warnings" => 0
+);
 
-unless ( eval { ExtUtils::MakeMaker->VERSION(6.56) } ) {
-  my $br = delete $WriteMakefileArgs{BUILD_REQUIRES};
-  my $pp = $WriteMakefileArgs{PREREQ_PM};
-  for my $mod ( keys %$br ) {
-    if ( exists $pp->{$mod} ) {
-      $pp->{$mod} = $br->{$mod} if $br->{$mod} > $pp->{$mod};
-    }
-    else {
-      $pp->{$mod} = $br->{$mod};
-    }
-  }
+
+unless ( eval { ExtUtils::MakeMaker->VERSION(6.63_03) } ) {
+  delete $WriteMakefileArgs{TEST_REQUIRES};
+  delete $WriteMakefileArgs{BUILD_REQUIRES};
+  $WriteMakefileArgs{PREREQ_PM} = \%FallbackPrereqs;
 }
 
 delete $WriteMakefileArgs{CONFIGURE_REQUIRES}
