@@ -2,11 +2,8 @@ package Web::Machine;
 BEGIN {
   $Web::Machine::AUTHORITY = 'cpan:STEVAN';
 }
-{
-  $Web::Machine::VERSION = '0.13';
-}
 # ABSTRACT: A Perl port of Webmachine
-
+$Web::Machine::VERSION = '0.14';
 use strict;
 use warnings;
 
@@ -110,7 +107,7 @@ Web::Machine - A Perl port of Webmachine
 
 =head1 VERSION
 
-version 0.13
+version 0.14
 
 =head1 SYNOPSIS
 
@@ -163,8 +160,11 @@ This is a port of L<Webmachine|https://github.com/basho/webmachine>, actually
 it is much closer to L<the Ruby
 version|https://github.com/seancribbs/webmachine-ruby>, with a little bit of
 L<the JavaScript version|https://github.com/tautologistics/nodemachine> and
-even some of L<the Python version|https://github.com/davisp/pywebmachine>
+even some of L<the Python version|https://github.com/benoitc/pywebmachine>
 thrown in for good measure.
+
+You can learn a bit about Web::Machine's history from the slides for my L<2012
+YAPC::NA talk|https://speakerdeck.com/stevan_little/rest-from-the-trenches>.
 
 =head1 CAVEAT
 
@@ -234,7 +234,9 @@ out information about the path taken through the state machine to STDERR.
 
 =item Node JS port - L<https://github.com/tautologistics/nodemachine>
 
-=item Python port - L<https://github.com/davisp/pywebmachine>
+=item Python port - L<https://github.com/benoitc/pywebmachine>
+
+=item 2012 YAPC::NA slides - L<https://speakerdeck.com/stevan_little/rest-from-the-trenches>
 
 =back
 
@@ -272,6 +274,10 @@ Fayland Lam <fayland@gmail.com>
 
 =item *
 
+George Hartzell <hartzell@alerce.com>
+
+=item *
+
 Gregory Oschwald <goschwald@maxmind.com>
 
 =item *
@@ -294,7 +300,7 @@ Thomas Sibley <tsibley@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Infinity Interactive, Inc..
+This software is copyright (c) 2014 by Infinity Interactive, Inc..
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

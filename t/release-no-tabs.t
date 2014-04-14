@@ -8,24 +8,9 @@ BEGIN {
 
 use strict;
 use warnings;
+use Test::More;
 
-# this test was generated with Dist::Zilla::Plugin::NoTabsTests 0.05
+eval 'use Test::NoTabs';
+plan skip_all => 'Test::NoTabs required' if $@;
 
-use Test::More 0.88;
-use Test::NoTabs;
-
-my @files = (
-    'lib/Web/Machine.pm',
-    'lib/Web/Machine/FSM.pm',
-    'lib/Web/Machine/FSM/States.pm',
-    'lib/Web/Machine/I18N.pm',
-    'lib/Web/Machine/I18N/en.pm',
-    'lib/Web/Machine/Manual.pod',
-    'lib/Web/Machine/Resource.pm',
-    'lib/Web/Machine/Util.pm',
-    'lib/Web/Machine/Util/BodyEncoding.pm',
-    'lib/Web/Machine/Util/ContentNegotiation.pm'
-);
-
-notabs_ok($_) foreach @files;
-done_testing;
+all_perl_files_ok();

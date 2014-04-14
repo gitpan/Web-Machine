@@ -2,11 +2,8 @@ package Web::Machine::FSM;
 BEGIN {
   $Web::Machine::FSM::AUTHORITY = 'cpan:STEVAN';
 }
-{
-  $Web::Machine::FSM::VERSION = '0.13';
-}
 # ABSTRACT: The State Machine runner
-
+$Web::Machine::FSM::VERSION = '0.14';
 use strict;
 use warnings;
 
@@ -83,6 +80,7 @@ sub run {
 
                 if ( $DEBUG ) {
                     require Data::Dumper;
+                    local $Data::Dumper::Useqq = 1;
                     warn Data::Dumper::Dumper( $request->env );
                     warn Data::Dumper::Dumper( $response->finalize );
                 }
@@ -116,7 +114,18 @@ sub run {
 
     $self->filter_response( $resource )
         unless $request->env->{'web.machine.streaming_push'};
-    $resource->finish_request( $metadata );
+    try {
+        $resource->finish_request( $metadata );
+    }
+    catch {
+        warn $_ if $DEBUG;
+
+        if ( $request->logger ) {
+            $request->logger->( { level => 'error', message => $_ } );
+        }
+
+        $response->status( 500 );
+    };
     $response->header( $self->tracing_header, (join ',' => @trace) )
         if $tracing;
 
@@ -165,7 +174,7 @@ Web::Machine::FSM - The State Machine runner
 
 =head1 VERSION
 
-version 0.13
+version 0.14
 
 =head1 SYNOPSIS
 
@@ -246,6 +255,10 @@ Fayland Lam <fayland@gmail.com>
 
 =item *
 
+George Hartzell <hartzell@alerce.com>
+
+=item *
+
 Gregory Oschwald <goschwald@maxmind.com>
 
 =item *
@@ -268,7 +281,7 @@ Thomas Sibley <tsibley@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Infinity Interactive, Inc..
+This software is copyright (c) 2014 by Infinity Interactive, Inc..
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

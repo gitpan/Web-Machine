@@ -2,11 +2,8 @@ package Web::Machine::Util::BodyEncoding;
 BEGIN {
   $Web::Machine::Util::BodyEncoding::AUTHORITY = 'cpan:STEVAN';
 }
-{
-  $Web::Machine::Util::BodyEncoding::VERSION = '0.13';
-}
 # ABSTRACT: Module to handle body encoding
-
+$Web::Machine::Util::BodyEncoding::VERSION = '0.14';
 use strict;
 use warnings;
 
@@ -72,7 +69,7 @@ Web::Machine::Util::BodyEncoding - Module to handle body encoding
 
 =head1 VERSION
 
-version 0.13
+version 0.14
 
 =head1 SYNOPSIS
 
@@ -138,6 +135,10 @@ Fayland Lam <fayland@gmail.com>
 
 =item *
 
+George Hartzell <hartzell@alerce.com>
+
+=item *
+
 Gregory Oschwald <goschwald@maxmind.com>
 
 =item *
@@ -160,7 +161,7 @@ Thomas Sibley <tsibley@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Infinity Interactive, Inc..
+This software is copyright (c) 2014 by Infinity Interactive, Inc..
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
