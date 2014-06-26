@@ -3,7 +3,7 @@ BEGIN {
   $Web::Machine::FSM::AUTHORITY = 'cpan:STEVAN';
 }
 # ABSTRACT: The State Machine runner
-$Web::Machine::FSM::VERSION = '0.14';
+$Web::Machine::FSM::VERSION = '0.15';
 use strict;
 use warnings;
 
@@ -174,7 +174,7 @@ Web::Machine::FSM - The State Machine runner
 
 =head1 VERSION
 
-version 0.14
+version 0.15
 
 =head1 SYNOPSIS
 
@@ -268,6 +268,14 @@ Jesse Luehrs <doy@tozt.net>
 =item *
 
 John SJ Anderson <genehack@genehack.org>
+
+=item *
+
+Mike Raynham <enquiries@mikeraynham.co.uk>
+
+=item *
+
+Mike Raynham <mike.raynham@spareroom.co.uk>
 
 =item *
 

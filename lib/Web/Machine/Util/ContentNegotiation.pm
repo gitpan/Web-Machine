@@ -3,7 +3,7 @@ BEGIN {
   $Web::Machine::Util::ContentNegotiation::AUTHORITY = 'cpan:STEVAN';
 }
 # ABSTRACT: Module to handle content negotiation
-$Web::Machine::Util::ContentNegotiation::VERSION = '0.14';
+$Web::Machine::Util::ContentNegotiation::VERSION = '0.15';
 use strict;
 use warnings;
 
@@ -70,7 +70,7 @@ Web::Machine::Util::ContentNegotiation - Module to handle content negotiation
 
 =head1 VERSION
 
-version 0.14
+version 0.15
 
 =head1 SYNOPSIS
 
@@ -158,6 +158,14 @@ Jesse Luehrs <doy@tozt.net>
 =item *
 
 John SJ Anderson <genehack@genehack.org>
+
+=item *
+
+Mike Raynham <enquiries@mikeraynham.co.uk>
+
+=item *
+
+Mike Raynham <mike.raynham@spareroom.co.uk>
 
 =item *
 

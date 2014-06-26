@@ -3,7 +3,7 @@ BEGIN {
   $Web::Machine::Util::BodyEncoding::AUTHORITY = 'cpan:STEVAN';
 }
 # ABSTRACT: Module to handle body encoding
-$Web::Machine::Util::BodyEncoding::VERSION = '0.14';
+$Web::Machine::Util::BodyEncoding::VERSION = '0.15';
 use strict;
 use warnings;
 
@@ -69,7 +69,7 @@ Web::Machine::Util::BodyEncoding - Module to handle body encoding
 
 =head1 VERSION
 
-version 0.14
+version 0.15
 
 =head1 SYNOPSIS
 
@@ -148,6 +148,14 @@ Jesse Luehrs <doy@tozt.net>
 =item *
 
 John SJ Anderson <genehack@genehack.org>
+
+=item *
+
+Mike Raynham <enquiries@mikeraynham.co.uk>
+
+=item *
+
+Mike Raynham <mike.raynham@spareroom.co.uk>
 
 =item *
 

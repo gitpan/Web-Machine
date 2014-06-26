@@ -1,5 +1,6 @@
 package Web::Machine::Manual;
 #ABSTRACT: Learn how to use Web::Machine
+$Web::Machine::Manual::VERSION = '0.15';
 
 __END__
 
@@ -11,7 +12,7 @@ Web::Machine::Manual - Learn how to use Web::Machine
 
 =head1 VERSION
 
-version 0.14
+version 0.15
 
 =head1 Web::Machine IN A NUTSHELL
 
@@ -126,6 +127,14 @@ Jesse Luehrs <doy@tozt.net>
 =item *
 
 John SJ Anderson <genehack@genehack.org>
+
+=item *
+
+Mike Raynham <enquiries@mikeraynham.co.uk>
+
+=item *
+
+Mike Raynham <mike.raynham@spareroom.co.uk>
 
 =item *
 

@@ -3,7 +3,7 @@ BEGIN {
   $Web::Machine::Util::AUTHORITY = 'cpan:STEVAN';
 }
 # ABSTRACT: General Utility module
-$Web::Machine::Util::VERSION = '0.14';
+$Web::Machine::Util::VERSION = '0.15';
 use strict;
 use warnings;
 
@@ -84,7 +84,7 @@ Web::Machine::Util - General Utility module
 
 =head1 VERSION
 
-version 0.14
+version 0.15
 
 =head1 SYNOPSIS
 
@@ -231,6 +231,14 @@ Jesse Luehrs <doy@tozt.net>
 =item *
 
 John SJ Anderson <genehack@genehack.org>
+
+=item *
+
+Mike Raynham <enquiries@mikeraynham.co.uk>
+
+=item *
+
+Mike Raynham <mike.raynham@spareroom.co.uk>
 
 =item *
 

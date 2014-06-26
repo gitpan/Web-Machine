@@ -3,7 +3,7 @@ BEGIN {
   $Web::Machine::I18N::en::AUTHORITY = 'cpan:STEVAN';
 }
 # ABSTRACT: The English support for I18N-ed HTTP information
-$Web::Machine::I18N::en::VERSION = '0.14';
+$Web::Machine::I18N::en::VERSION = '0.15';
 use strict;
 use warnings;
 
@@ -65,7 +65,7 @@ Web::Machine::I18N::en - The English support for I18N-ed HTTP information
 
 =head1 VERSION
 
-version 0.14
+version 0.15
 
 =head1 SYNOPSIS
 
@@ -124,6 +124,14 @@ Jesse Luehrs <doy@tozt.net>
 =item *
 
 John SJ Anderson <genehack@genehack.org>
+
+=item *
+
+Mike Raynham <enquiries@mikeraynham.co.uk>
+
+=item *
+
+Mike Raynham <mike.raynham@spareroom.co.uk>
 
 =item *
 

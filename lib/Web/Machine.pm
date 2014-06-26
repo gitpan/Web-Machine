@@ -3,7 +3,7 @@ BEGIN {
   $Web::Machine::AUTHORITY = 'cpan:STEVAN';
 }
 # ABSTRACT: A Perl port of Webmachine
-$Web::Machine::VERSION = '0.14';
+$Web::Machine::VERSION = '0.15';
 use strict;
 use warnings;
 
@@ -28,12 +28,20 @@ sub new {
             && use_package_optimistically($args{'resource'})->isa('Web::Machine::Resource'))
                 || confess 'You must pass in a resource for this Web::Machine';
 
+    if (exists $args{'request_class'}) {
+        use_package_optimistically($args{'request_class'})->isa('Plack::Request')
+            || confess 'The request_class class must inherit from Plack::Request';
+    }
+    else {
+        $args{'request_class'} = 'Plack::Request';
+    }
+
     $class->SUPER::new( \%args );
 }
 
 sub inflate_request {
     my ($self, $env) = @_;
-    inflate_headers( Plack::Request->new( $env ) );
+    inflate_headers( $self->{request_class}->new( $env ) );
 }
 
 sub create_fsm {
@@ -107,7 +115,7 @@ Web::Machine - A Perl port of Webmachine
 
 =head1 VERSION
 
-version 0.14
+version 0.15
 
 =head1 SYNOPSIS
 
@@ -180,15 +188,24 @@ set forward by that module.
 
 =over 4
 
-=item C<< new( resource => $resource_classname, ?resource_args => $arg_list, ?tracing => 1|0, ?streaming => 1|0 ) >>
+=item C<< new( resource => $resource_classname, ?resource_args => $arg_list, ?tracing => 1|0, ?streaming => 1|0, ?request_class => $request_class ) >>
 
 The constructor expects to get a C<$resource_classname>, which it will use to
-create an instance of the resource class. If that class requires any additional
-arguments, they can be specified with the C<resource_args> parameter. It can
-also take an optional C<tracing> parameter which it will pass onto the
-L<Web::Machine::FSM>, and an optional C<streaming> parameter, which if true
-will run the request in a L<PSGI|http://plackperl.org/> streaming response, which can be useful if
-you need to run your content generation asynchronously.
+load and create an instance of the resource class. If that class requires any
+additional arguments, they can be specified with the C<resource_args>
+parameter. The contents of the C<resource_args> parameter will be made
+available to the C<init()> method of C<Web::Machine::Resource>.
+
+The C<new> method can also take an optional C<tracing> parameter which it will
+pass on to L<Web::Machine::FSM> and an optional C<streaming> parameter, which
+if true will run the request in a L<PSGI|http://plackperl.org/> streaming
+response. This can be useful if you need to run your content generation
+asynchronously.
+
+The optional C<request_class> parameter accepts the name of a module that will
+be used as the request object. The module must be a class that inherits from
+L<Plack::Request>. Use this if you have a subclass of L<Plack::Request> that
+you would like to use in your L<Web::Machine::Resource>.
 
 =item C<inflate_request( $env )>
 
@@ -287,6 +304,14 @@ Jesse Luehrs <doy@tozt.net>
 =item *
 
 John SJ Anderson <genehack@genehack.org>
+
+=item *
+
+Mike Raynham <enquiries@mikeraynham.co.uk>
+
+=item *
+
+Mike Raynham <mike.raynham@spareroom.co.uk>
 
 =item *
 
